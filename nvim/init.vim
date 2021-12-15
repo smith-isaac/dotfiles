@@ -3,6 +3,7 @@ set rnu
 set scrolloff=8
 set sidescrolloff=8
 set shiftwidth=4
+filetype on
 
 " Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -24,6 +25,8 @@ NeoBundle 'preservim/nerdtree'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
+NeoBundle 'junegunn/fzf'
+NeoBundle 'junegunn/fzf.vim'
 
 call neobundle#end()
 
@@ -43,7 +46,7 @@ noremap <leader>t :NERDTreeToggle<CR>
 noremap <leader>ft :set filetype?<CR>
 
 " Some cool maps
-nmap <leader>ve :tabedit ~/.config/nvim/init.vim<CR>
+nmap <leader>ve :edit ~/.config/nvim/init.vim<CR>
 nmap <leader>vr :source ~/.config/nvim/init.vim<CR>
 
 nmap <leader>k :nohlsearch<CR>
@@ -52,3 +55,21 @@ map gf :edit <cfile><cr>
 
 vnoremap < <gv
 vnoremap > >gv
+
+nmap <leader>g :Git<cr>
+nmap <leader>p :Git push<cr>
+
+" FZF mappings
+
+nmap <leader>o :Files<cr>
+
+let g:fzf_ags_command = 'ctags -R'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+" Custom filetype mappings
+autocmd FileType c,cpp noremap <leader>m :!make<cr>
+autocmd FileType c,cpp noremap <leader>c :!make clean<cr>
