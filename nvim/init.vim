@@ -27,6 +27,7 @@ NeoBundle 'ryanoasis/vim-devicons'
 NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 NeoBundle 'junegunn/fzf'
 NeoBundle 'junegunn/fzf.vim'
+NeoBundle 'voldikss/vim-floaterm'
 
 call neobundle#end()
 
@@ -51,6 +52,8 @@ nmap <leader>vr :source ~/.config/nvim/init.vim<CR>
 
 nmap <leader>k :nohlsearch<CR>
 
+nmap <leader><TAB> :tabe<cr>
+
 map gf :edit <cfile><cr>
 
 vnoremap < <gv
@@ -73,5 +76,6 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 " Custom filetype mappings
 autocmd FileType c,cpp noremap <leader>m :!make<cr>
 autocmd FileType c,cpp noremap <leader>c :!make clean<cr>
+"autocmd FileType ruby noremap <buffer> <leader>r :!ruby {"%:r" . "_test." . "%:e"}<cr>
+autocmd FileType ruby nmap <buffer> <leader>r :exec "!ruby " . expand("%:r") . "_test." . expand("%:e")<cr>
 
-nmap <leader>r :echo expand("%:r") . "_test." . expand("%:e")<cr>
