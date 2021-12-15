@@ -37,3 +37,4 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 noremap <leader>t :NERDTreeToggle<CR>
+noremap <leader>ft :set filetype?<CR>
