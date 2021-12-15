@@ -73,3 +73,5 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 " Custom filetype mappings
 autocmd FileType c,cpp noremap <leader>m :!make<cr>
 autocmd FileType c,cpp noremap <leader>c :!make clean<cr>
+
+nmap <leader>r :echo expand("%:r") . "_test." . expand("%:e")<cr>
