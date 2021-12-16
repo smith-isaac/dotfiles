@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+ln -s $PWD/init.vim ~/.config/nvim/
+ln -s $PWD/languages.vim ~/.config/nvim/
+ln -s $PWD/lsp-config.vim ~/.config/nvim/
+ln -s $PWD/neobundle.vim ~/.config/nvim/

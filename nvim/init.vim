@@ -3,33 +3,14 @@ set rnu
 set scrolloff=8
 set sidescrolloff=8
 set shiftwidth=4
+"set list
+"set listchars=trail:-
 filetype on
 
 " Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'preservim/nerdtree'
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-NeoBundle 'ryanoasis/vim-devicons'
-NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
-NeoBundle 'junegunn/fzf'
-NeoBundle 'junegunn/fzf.vim'
-NeoBundle 'voldikss/vim-floaterm'
-
-call neobundle#end()
+source /home/isaacsmith/.config/nvim/neobundle.vim
 
 " Required:
 filetype plugin indent on
@@ -73,9 +54,8 @@ let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffse
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
-" Custom filetype mappings
-autocmd FileType c,cpp noremap <leader>m :!make<cr>
-autocmd FileType c,cpp noremap <leader>c :!make clean<cr>
-"autocmd FileType ruby noremap <buffer> <leader>r :!ruby {"%:r" . "_test." . "%:e"}<cr>
-autocmd FileType ruby nmap <buffer> <leader>r :exec "!ruby " . expand("%:r") . "_test." . expand("%:e")<cr>
+source ~/.config/nvim/languages.vim
 
+" source /home/isaacsmith/.config/nvim/lsp-config.vim
+
+autocmd FileType ruby set shiftwidth=2
