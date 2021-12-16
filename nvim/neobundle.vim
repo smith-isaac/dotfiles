@@ -20,6 +20,13 @@ NeoBundle 'junegunn/fzf'
 NeoBundle 'junegunn/fzf.vim'
 "NeoBundle 'voldikss/vim-floaterm'
 NeoBundle 'neovim/nvim-lspconfig'
+NeoBundle 'hrsh7th/cmp-nvim-lsp'
+NeoBundle 'hrsh7th/cmp-buffer'
+NeoBundle 'hrsh7th/cmp-path'
+NeoBundle 'hrsh7th/cmp-cmdline'
+NeoBundle 'hrsh7th/nvim-cmp'
+NeoBundle 'hrsh7th/cmp-vsnip'
+NeoBundle 'hrsh7th/vim-vsnip'
 
 call neobundle#end()
 

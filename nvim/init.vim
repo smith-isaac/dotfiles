@@ -57,5 +57,6 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 source ~/.config/nvim/languages.vim
 
 " source /home/isaacsmith/.config/nvim/lsp-config.vim
+source /home/isaacsmith/.config/nvim/nvim-cmp.vim
 
 autocmd FileType ruby set shiftwidth=2
