@@ -9,7 +9,9 @@ i.e.
 
 ## Requirements
 Packages to install that are necessary for the following plugins
+
 Fzf: fzf, ripgrep
+
 Coc: python3-neovim, node
 
 ## TODO

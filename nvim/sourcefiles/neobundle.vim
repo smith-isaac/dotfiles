@@ -21,7 +21,7 @@ NeoBundle 'junegunn/fzf'
 NeoBundle 'junegunn/fzf.vim'
 "NeoBundle 'voldikss/vim-floaterm'
 NeoBundle 'neovim/nvim-lspconfig'
-
+NeoBundle 'iamcco/markdown-preview.nvim'
 " Bundles required by nvim-cmp
 " Removing these since I don't really want them right now
 "NeoBundle 'hrsh7th/cmp-nvim-lsp'

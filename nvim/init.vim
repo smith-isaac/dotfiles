@@ -3,6 +3,7 @@ set rnu
 set scrolloff=8
 set sidescrolloff=8
 set shiftwidth=4
+set hidden
 "set list
 "set listchars=trail:-
 filetype on
@@ -11,7 +12,7 @@ filetype on
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 " NeoBundle Source File
-source $HOME/.config/nvim/neobundle.vim
+source $HOME/.config/nvim/sourcefiles/neobundle.vim
 
 " Required:
 filetype plugin indent on
@@ -46,10 +47,10 @@ let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffse
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
-source ~/.config/nvim/languages.vim
-source ~/.config/nvim/coc.vim
-source ~/.config/nvim/lsp-config.vim
-source ~/.config/nvim/nerdcommenter.vim
+source ~/.config/nvim/sourcefiles/languages.vim
+source ~/.config/nvim/sourcefiles/coc.vim
+source ~/.config/nvim/sourcefiles/lsp-config.vim
+source ~/.config/nvim/sourcefiles/nerdcommenter.vim
 
 " Not using nvim-cmp right now so I am disabling the nvim-cmp config file
 " source /home/isaacsmith/.config/nvim/nvim-cmp.vim
