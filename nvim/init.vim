@@ -10,6 +10,7 @@ filetype on
 " Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 
+" NeoBundle Source File
 source /home/isaacsmith/.config/nvim/neobundle.vim
 
 " Required:
@@ -26,26 +27,17 @@ let mapleader=" "
 
 noremap <leader>t :NERDTreeToggle<CR>
 noremap <leader>ft :set filetype?<CR>
-
-" Some cool maps
 nmap <leader>ve :edit ~/.config/nvim/init.vim<CR>
 nmap <leader>vr :source ~/.config/nvim/init.vim<CR>
-
 nmap <leader>k :nohlsearch<CR>
-
 nmap <leader><TAB> :tabe<cr>
-
 map gf :edit <cfile><cr>
-
 vnoremap < <gv
 vnoremap > >gv
-
 nmap <leader>g :Git<cr>
 nmap <leader>p :Git push<cr>
-
-" FZF mappings
-
 nmap <leader>o :Files<cr>
+nmap <leader>d :pwd<cr>
 
 let g:fzf_ags_command = 'ctags -R'
 " Border color
@@ -55,8 +47,13 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
 source ~/.config/nvim/languages.vim
+source /home/isaacsmith/.config/nvim/coc.vim
+source /home/isaacsmith/.config/nvim/lsp-config.vim
+source /home/isaacsmith/.config/nvim/nerdcommenter.vim
 
-" source /home/isaacsmith/.config/nvim/lsp-config.vim
-source /home/isaacsmith/.config/nvim/nvim-cmp.vim
+" Not using nvim-cmp right now so I am disabling the nvim-cmp config file
+" source /home/isaacsmith/.config/nvim/nvim-cmp.vim
+
+let g:coc_global_extensions = ['coc-clangd', 'coc-solargraph', 'coc-pyright']
 
 autocmd FileType ruby set shiftwidth=2
