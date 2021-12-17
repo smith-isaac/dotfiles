@@ -7,15 +7,21 @@ i.e.
 
     ln -s /path/in/repo /path/to/config/file
 
+Made `setup.sh` file that sets up symbolic links. Has to be run from `dotfiles/nvim` directory. Run as follows:
+
+    ./setup.sh
+
+May have to run `chmod +x setup.sh` first
+
 ## Requirements
 Packages to install that are necessary for the following plugins
 
 Fzf: fzf, ripgrep
 
 Coc: python3-neovim, node
+- Ruby: `gem install solargraph`
+- C/C++: `sudo apt install clangd`
+- Python3-neovim: `python3 -m pip install neovim`
 
 ## TODO
-- Make all external `*.vim` files in another folder, so I don't have to keep linking new files and editing `setup-links` file
-    - That way I only have to link the folder instead of each individual file
-    - Maybe different folders for different purposes
 - Create script to install Neobundle, fzf, ripgrep, python3-neovim, node, etc
