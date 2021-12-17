@@ -11,7 +11,7 @@ filetype on
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 " NeoBundle Source File
-source /home/isaacsmith/.config/nvim/neobundle.vim
+source $HOME/.config/nvim/neobundle.vim
 
 " Required:
 filetype plugin indent on
@@ -47,9 +47,9 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
 source ~/.config/nvim/languages.vim
-source /home/isaacsmith/.config/nvim/coc.vim
-source /home/isaacsmith/.config/nvim/lsp-config.vim
-source /home/isaacsmith/.config/nvim/nerdcommenter.vim
+source ~/.config/nvim/coc.vim
+source ~/.config/nvim/lsp-config.vim
+source ~/.config/nvim/nerdcommenter.vim
 
 " Not using nvim-cmp right now so I am disabling the nvim-cmp config file
 " source /home/isaacsmith/.config/nvim/nvim-cmp.vim

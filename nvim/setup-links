@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-ln -s $PWD/init.vim ~/.config/nvim/
-ln -s $PWD/languages.vim ~/.config/nvim/
-ln -s $PWD/lsp-config.vim ~/.config/nvim/
-ln -s $PWD/neobundle.vim ~/.config/nvim/
+ln -s $PWD/init.vim $HOME/.config/nvim/
+ln -s $PWD/languages.vim $HOME/.config/nvim/
+ln -s $PWD/lsp-config.vim $HOME/.config/nvim/
+ln -s $PWD/neobundle.vim $HOME/.config/nvim/
+ln -s $PWD/coc.vim $HOME/.config/nvim/
+ln -s $PWD/nerdcommenter.vim $HOME/.config/nvim/
