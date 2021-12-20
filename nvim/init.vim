@@ -4,9 +4,8 @@ set scrolloff=8
 set sidescrolloff=8
 set shiftwidth=4
 set hidden
-"set list
-"set listchars=trail:-
 filetype on
+set spell
 
 " Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim/

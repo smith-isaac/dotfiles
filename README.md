@@ -25,3 +25,5 @@ Coc: python3-neovim, node
 
 ## TODO
 - Create script to install Neobundle, fzf, ripgrep, python3-neovim, node, etc
+- Change NeoBundle install path to `~/.config/nvim/bundle/`
+- Maybe use `dein.vim` instead of NeoBundle
