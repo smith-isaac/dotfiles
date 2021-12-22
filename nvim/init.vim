@@ -8,7 +8,8 @@ filetype on
 set spell
 
 " Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+" set runtimepath+=~/.vim/bundle/neobundle.vim/
+set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
 
 " NeoBundle Source File
 source $HOME/.config/nvim/sourcefiles/neobundle.vim
@@ -47,13 +48,13 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 
 source ~/.config/nvim/sourcefiles/languages.vim
-source ~/.config/nvim/sourcefiles/coc.vim
-source ~/.config/nvim/sourcefiles/lsp-config.vim
+" source ~/.config/nvim/sourcefiles/coc.vim
+" source ~/.config/nvim/sourcefiles/lsp-config.vim
+" Nvim-cmp.vim has lsp-config setup params in it already
+source ~/.config/nvim/sourcefiles/nvim-cmp.vim
 source ~/.config/nvim/sourcefiles/nerdcommenter.vim
 
 " Not using nvim-cmp right now so I am disabling the nvim-cmp config file
-" source /home/isaacsmith/.config/nvim/nvim-cmp.vim
 
-let g:coc_global_extensions = ['coc-clangd', 'coc-solargraph', 'coc-pyright']
+" let g:coc_global_extensions = ['coc-clangd', 'coc-solargraph', 'coc-pyright']
 
-autocmd FileType ruby set shiftwidth=2

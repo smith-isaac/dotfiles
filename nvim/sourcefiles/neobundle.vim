@@ -1,6 +1,7 @@
 " Neobundle config file, separated from the init.vim file
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
+" call neobundle#begin(expand('~/.config/nvim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -24,16 +25,16 @@ NeoBundle 'neovim/nvim-lspconfig'
 NeoBundle 'iamcco/markdown-preview.nvim'
 " Bundles required by nvim-cmp
 " Removing these since I don't really want them right now
-"NeoBundle 'hrsh7th/cmp-nvim-lsp'
-"NeoBundle 'hrsh7th/cmp-buffer'
-"NeoBundle 'hrsh7th/cmp-path'
-"NeoBundle 'hrsh7th/cmp-cmdline'
-"NeoBundle 'hrsh7th/nvim-cmp'
-"NeoBundle 'hrsh7th/cmp-vsnip'
-"NeoBundle 'hrsh7th/vim-vsnip'
+NeoBundle 'hrsh7th/cmp-nvim-lsp'
+NeoBundle 'hrsh7th/cmp-buffer'
+NeoBundle 'hrsh7th/cmp-path'
+NeoBundle 'hrsh7th/cmp-cmdline'
+NeoBundle 'hrsh7th/nvim-cmp'
+NeoBundle 'hrsh7th/cmp-vsnip'
+NeoBundle 'hrsh7th/vim-vsnip'
 
 " Coc
-NeoBundle 'neoclide/coc.nvim', 'release'
+" NeoBundle 'neoclide/coc.nvim', 'release'
 call neobundle#end()
 
 " Required:

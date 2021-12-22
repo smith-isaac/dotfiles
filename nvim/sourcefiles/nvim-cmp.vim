@@ -60,4 +60,7 @@ lua <<EOF
   require('lspconfig')['solargraph'].setup {
     capabilities = capabilities
   }
+  require('lspconfig')['clangd'].setup {
+    capabilities = capabilities
+  }
 EOF

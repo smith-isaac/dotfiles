@@ -13,10 +13,16 @@ Made `setup.sh` file that sets up symbolic links. Has to be run from `dotfiles/n
 
 May have to run `chmod +x setup.sh` first
 
+Made `install-deps.sh` to install dependencies. Run as follows:
+
+    chmod +x install-deps.sh && sudo ./install-deps.sh
+
 ## Requirements
 Packages to install that are necessary for the following plugins
 
-Fzf: fzf, ripgrep
+Fzf: fzf, ripgrep, universal-ctags, silversearcher-ag, fd-find
+
+    sudo apt install fzf ripgrep universal-ctags silversearcher-ag fd-find
 
 Coc: python3-neovim, node
 - Ruby: `gem install solargraph`
@@ -26,14 +32,9 @@ Coc: python3-neovim, node
 Lsp-config:
 - Ruby: `gem install solargraph`
 - C/C++: `sudo apt install clangd bear`
-
+- Python: (pyright through npm) `sudo apt install npm && sudo npm install -g pyright`
 
 ## TODO
-- Get all needed dependancies before creating `install-deps.sh`
-    - Create script to install Neobundle, fzf, ripgrep, python3-neovim, node, etc
-- Change NeoBundle install path to `~/.config/nvim/bundle/`
 - Maybe use `dein.vim` instead of NeoBundle
-- Try using `lsp-config` instead of `coc.vim`
-    - I can use `sonargraph` and `clangd` in `lsp-config`
-    - Make new branch for this change to not screw everything up
-- Use `bear` to generate `compile_commands.json` for C/C++_ projects
+    - Maybe set bundle install directory to be `~/.config/nvim/bundle/` instead of `~/.vim/bundle/`
+    - All in a new branch though after I merge this one
