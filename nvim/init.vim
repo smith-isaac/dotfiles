@@ -6,8 +6,9 @@ set shiftwidth=4
 set hidden
 filetype on
 set spell
-set splitbelow
+" set splitbelow
 set splitright
+" set cursorline
 
 " Required:
 " set runtimepath+=~/.vim/bundle/neobundle.vim/
