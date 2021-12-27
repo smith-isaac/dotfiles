@@ -6,6 +6,8 @@ set shiftwidth=4
 set hidden
 filetype on
 set spell
+set splitbelow
+set splitright
 
 " Required:
 " set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -23,22 +25,7 @@ NeoBundleCheck
 
 let g:airline_theme='deus'
 
-nnoremap <SPACE> <Nop>
-let mapleader=" "
-
-noremap <leader>t :NERDTreeToggle<CR>
-noremap <leader>ft :set filetype?<CR>
-nmap <leader>ve :edit ~/.config/nvim/init.vim<CR>
-nmap <leader>vr :source ~/.config/nvim/init.vim<CR>
-nmap <leader>k :nohlsearch<CR>
-nmap <leader><TAB> :tabe<cr>
-map gf :edit <cfile><cr>
-vnoremap < <gv
-vnoremap > >gv
-nmap <leader>g :Git<cr>
-nmap <leader>p :Git push<cr>
-nmap <leader>o :Files<cr>
-nmap <leader>d :pwd<cr>
+source ~/.config/nvim/sourcefiles/mappings.vim
 
 let g:fzf_ags_command = 'ctags -R'
 " Border color
