@@ -24,3 +24,5 @@ nnoremap <C-l> <C-w>l
 " Buffer mappings
 nnoremap <C-Left> gT
 nnoremap <C-Right> gt
+nnoremap <S-Left> :-tabmove<cr>
+nnoremap <S-Right> :+tabmove<cr>
