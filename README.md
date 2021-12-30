@@ -38,3 +38,6 @@ Lsp-config:
 - Maybe use `dein.vim` instead of NeoBundle
     - Maybe set bundle install directory to be `~/.config/nvim/bundle/` instead of `~/.vim/bundle/`
     - All in a new branch though after I merge this one
+- For $\LaTeX$ use [TeXLab](https://github.com/latex-lsp/texlab)
+    - Make sure to download prebuilt binary or automate building from source
+    - Setup links so that I can keep `vim-latex` in repo and have it still work
