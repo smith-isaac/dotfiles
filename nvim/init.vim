@@ -41,6 +41,7 @@ source ~/.config/nvim/sourcefiles/languages.vim
 " Nvim-cmp.vim has lsp-config setup params in it already
 source ~/.config/nvim/sourcefiles/nvim-cmp.vim
 source ~/.config/nvim/sourcefiles/nerdcommenter.vim
+source ~/.config/nvim/sourcefiles/dashboard.vim
 
 " Not using nvim-cmp right now so I am disabling the nvim-cmp config file
 

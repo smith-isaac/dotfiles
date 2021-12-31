@@ -33,6 +33,9 @@ NeoBundle 'hrsh7th/nvim-cmp'
 NeoBundle 'hrsh7th/cmp-vsnip'
 NeoBundle 'hrsh7th/vim-vsnip'
 
+" Dashboard
+NeoBundle 'glepnir/dashboard-nvim'
+
 " Coc
 " NeoBundle 'neoclide/coc.nvim', 'release'
 call neobundle#end()
