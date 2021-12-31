@@ -13,6 +13,9 @@ vnoremap > >gv
 nmap <leader>g :Git<cr>
 nmap <leader>p :Git push<cr>
 nmap <leader>o :Files<cr>
+nmap <leader>h :History<cr>
+nmap <leader>tc :Colors<cr>
+nmap <leader>nf :enew<cr>
 nmap <leader>d :pwd<cr>
 
 " Split mappings
