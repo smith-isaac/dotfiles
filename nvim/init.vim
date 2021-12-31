@@ -10,19 +10,14 @@ set spell
 set splitright
 " set cursorline
 
-" Required:
-" set runtimepath+=~/.vim/bundle/neobundle.vim/
-set runtimepath+=~/.config/nvim/bundle/neobundle.vim/
-
-" NeoBundle Source File
-source $HOME/.config/nvim/sourcefiles/neobundle.vim
+source ~/.config/nvim/sourcefiles/dein.vim
 
 " Required:
 filetype plugin indent on
+syntax enable
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
-NeoBundleCheck
 
 let g:airline_theme='deus'
 

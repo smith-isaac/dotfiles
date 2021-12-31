@@ -42,6 +42,10 @@ Lsp-config:
     - Maybe set bundle install directory to be `~/.config/nvim/bundle/` instead
       of `~/.vim/bundle/`
     - All in a new branch though after I merge this one
+    - Specific instructions for [fzf.vim](https://github.com/Shougo/dein.vim/issues/74)
+    - Specific instructions for [Markdown-preview](https://github.com/iamcco/markdown-preview.nvim)
+        - Maybe change `cd app && yarn install` to `cd app && sh ./install.sh`
+	- Requires node: can get from installing [nvm](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl) first
 - For $\LaTeX$ use [TeXLab](https://github.com/latex-lsp/texlab)
     - Make sure to download prebuilt binary or automate building from source
     - Setup links so that I can keep `vim-latex` in repo and have it still work
