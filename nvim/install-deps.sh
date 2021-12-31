@@ -6,3 +6,7 @@ apt install fzf ripgrep universal-ctags silversearcher-ag fd-find
 # Dependencies for Lsp-config
 apt install clangd bear
 gem install solargraph
+
+# Node
+./install_deps.sh
+nvm install --lts
