@@ -45,5 +45,3 @@ Lsp-config:
 - For $\LaTeX$ use [TeXLab](https://github.com/latex-lsp/texlab)
     - Make sure to download prebuilt binary or automate building from source
     - Setup links so that I can keep `vim-latex` in repo and have it still work
-- Dashboard
-    - Set custom shortcuts in start screen
