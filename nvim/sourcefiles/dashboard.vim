@@ -59,7 +59,7 @@ let g:dashboard_custom_section={
 		\ 'description': ['Source init.nvim			<Space> v r'],
 		\ 'command': 'source ~/.config/nvim/init.vim'},
 	    \ 'find_file': {
-		\ 'description': ['Find file in dir		<Space> o'],
+		\ 'description': ['Find file in dir			<Space> o'],
 		\ 'command': 'Files'},
 	    \ 'new_file': {
 		\ 'description': ['New file			<Space> n f'],
