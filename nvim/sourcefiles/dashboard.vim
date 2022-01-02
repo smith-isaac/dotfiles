@@ -56,10 +56,10 @@ let g:dashboard_custom_section={
 		\ 'description': ['Edit init.nvim			<Space> v e'],
 		\ 'command': 'edit ~/.config/nvim/init.vim'},
 	    \ 'source_init': {
-		\ 'description': ['Source init.nvim			<Space> v r'],
+		\ 'description': ['Source init.nvim		<Space> v r'],
 		\ 'command': 'source ~/.config/nvim/init.vim'},
 	    \ 'find_file': {
-		\ 'description': ['Find file in dir			<Space> o'],
+		\ 'description': ['Find file in dir		<Space> o'],
 		\ 'command': 'Files'},
 	    \ 'new_file': {
 		\ 'description': ['New file			<Space> n f'],
@@ -68,7 +68,7 @@ let g:dashboard_custom_section={
 		\ 'description': ['Change colors			<Space> t c'],
 		\ 'command': 'Colors'},
 	    \ 'recent': {
-		\ 'description': ['Recent files			<Space> h'],
+		\ 'description': ['Recent files		<Space> h'],
 		\ 'command': 'History'},
 	    \ 'git': {
 		\ 'description': ['Open git			<Space> g'],
