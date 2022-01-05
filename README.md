@@ -1,6 +1,8 @@
 # dotfiles
 Config files for zsh, bash, nvim, etc
 
+#### This is my branch for redoing the config files for CMP and Lsp-config
+
 If I then create symbolic links to the dot files in this repository then I
 won't have copies everywhere
 
