@@ -10,3 +10,4 @@ autocmd FileType markdown nnoremap <buffer> <leader>md :MarkdownPreviewToggle<cr
 
 autocmd FileType ruby set shiftwidth=2
 autocmd FileType make set shiftwidth=4
+autocmd FileType tex set foldcolumn=3

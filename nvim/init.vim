@@ -7,6 +7,7 @@ set hidden
 set spell
 set splitright
 let g:airline_theme='deus'
+let g:tex_flavor='latex'
 " From nvim-cmp.vim
 set completeopt=menu,menuone,noselect
 

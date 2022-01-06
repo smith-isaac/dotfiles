@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 
-# Linking init.vim
-if ! [ -L $HOME/.config/nvim/init.vim ]; then
-    ln -s $PWD/init.vim $HOME/.config/nvim/
-fi
+# Files to source
+files=(init.vim sourcefiles lua)
 
-# Linking sourcefiles folder
-if ! [ -L $HOME/.config/nvim/sourcefiles ]; then
-    ln -s $PWD/sourcefiles $HOME/.config/nvim/
-fi
+for f in ${files[@]}; do
+    if ! [ -L $HOME/.config/nvim/$f ]; then
+	ln -s $PWD/$f $HOME/.config/nvim/
+    fi
+done
+
+# Linking all vim-latex files
+for f in vim-latex/*; do
+    if ! [ -L $HOME/.config/nvim/$f ]; then
+	ln -s $PWD/$f $HOME/.config/nvim/
+    fi
+done
