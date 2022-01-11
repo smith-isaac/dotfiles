@@ -1,7 +1,7 @@
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
-local servers = { 'solargraph', 'clangd', 'texlab'}
+local servers = { 'solargraph', 'clangd', 'texlab', 'julials'}
 
 for _, lsp in ipairs(servers) do
     if lsp == 'arduino_language_server' then
