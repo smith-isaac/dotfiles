@@ -40,6 +40,11 @@ Lsp-config:
 - Python: (pyright through npm) `sudo apt install npm && sudo npm install -g
   pyright`
 
+Julia:
+- Run the following in order to get the `julials` language server running correctly
+
+    julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
+
 ## TODO
 - Maybe use `dein.vim` instead of NeoBundle
     - Maybe set bundle install directory to be `~/.config/nvim/bundle/` instead
