@@ -8,5 +8,5 @@ apt install clangd bear
 gem install solargraph
 
 # Node
-./install_deps.sh
+./nvm_install.sh
 nvm install --lts
