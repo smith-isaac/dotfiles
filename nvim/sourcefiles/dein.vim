@@ -26,6 +26,7 @@ call dein#add('hrsh7th/nvim-cmp')
 call dein#add('L3MON4D3/LuaSnip')
 call dein#add('saadparwaiz1/cmp_luasnip')
 call dein#add('glepnir/dashboard-nvim')
+call dein#add('JuliaEditorSupport/julia-vim')
 
 call dein#end()
 
