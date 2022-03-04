@@ -83,6 +83,7 @@ I.e.all dependencies or apps I need to install as part of this config
     - `.bash_aliases`
     - `git-completion.bash`
     - `git-prompt.sh`
+    - `.mytheme.omp.json`
 
 ## TODO
 - [ ] Document all dependencies and symlinks needed in README to make transition to dotbot easier
