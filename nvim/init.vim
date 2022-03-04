@@ -1,3 +1,4 @@
+set expandtab
 set number
 set rnu
 set scrolloff=8
@@ -6,6 +7,8 @@ set shiftwidth=4
 set hidden
 set spell
 set splitright
+set list
+set listchars=trail:·
 let g:airline_theme='deus'
 let g:tex_flavor='latex'
 " From nvim-cmp.vim
