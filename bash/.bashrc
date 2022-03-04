@@ -141,4 +141,5 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-eval "$(oh-my-posh --init --shell bash --config '~/.mytheme.omp.json')"
+[ -L ~/.mytheme.omp.json ] && eval "$(oh-my-posh --init --shell bash --config '~/.mytheme.omp.json')"
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
