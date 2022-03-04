@@ -47,7 +47,7 @@ Julia:
 julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
 ```
 
-## Deps
+### Deps
 ---
 I.e.all dependencies or apps I need to install as part of this config
 - Neovim and plugins
@@ -66,6 +66,20 @@ I.e.all dependencies or apps I need to install as part of this config
         - After extracting, create symlink to $PATH so that julia can be run from anywhere (i.e. `/usr/local/bin`)
         - `julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'`
     - [TexLab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#texlab)
+ 
+ ### Symlinks
+ ---
+ - Neovim (all symlinks will be pointing to `~/.config/nvim/`)
+    - Create `~/.config/nvim` directory and `~/.config/nvim/dein` subdirectory
+        - Can likely be done by `mkdir -p ~/.config/nvim/dein`
+    - `init.vim`
+    - `lua`
+    - `sourcefiles`
+- Bash (all linked to `~/`)
+    - `.bashrc`
+    - `.bash_aliases`
+    - `git-completion.bash`
+    - `git-prompt.sh`
 
 ## TODO
 - [ ] Document all dependencies and symlinks needed in README to make transition to dotbot easier
