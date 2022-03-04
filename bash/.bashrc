@@ -142,3 +142,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+export PROMPT_DIRTRIM=3
