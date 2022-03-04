@@ -17,7 +17,6 @@ set completeopt=menu,menuone,noselect
 source ~/.config/nvim/sourcefiles/dein.vim
 source ~/.config/nvim/sourcefiles/mappings.vim
 source ~/.config/nvim/sourcefiles/languages.vim
-" source ~/.config/nvim/sourcefiles/nvim-cmp.vim
 lua require("nvim-cmp")
 lua require("lsp")
 source ~/.config/nvim/sourcefiles/nerdcommenter.vim
