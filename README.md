@@ -64,7 +64,7 @@ I.e.all dependencies or apps I need to install as part of this config
         - `sudo apt install clangd bear`
         - Need `bear` in order for language server to pick up on other dependant files
     - [Julials](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#julials)
-        - Get julia from julialang.com
+        - Get julia from [Julia Website](julialang.com)
         - After extracting, create symlink to $PATH so that julia can be run from anywhere (i.e. `/usr/local/bin`)
         - `julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'`
     - [TexLab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#texlab)
