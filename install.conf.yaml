@@ -1,0 +1,11 @@
+- link:
+    ~/:
+      relink: true
+      glob: true
+      path: bash/*
+      prefix: '.'
+    ~/.config/nvim/:
+      create: true
+      relink: true
+      glob: true
+      path: nvim/*
