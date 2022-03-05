@@ -25,3 +25,6 @@
     -
       command: setup/dein_installer.sh ~/.config/nvim/dein/
       description: Installing dein package manager for neovim
+    -
+      command: setup/oh_my_posh_setup
+      description: Setting up Oh My Posh
