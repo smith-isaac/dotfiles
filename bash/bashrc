@@ -143,3 +143,4 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -L ~/.mytheme.omp.json ] && eval "$(oh-my-posh --init --shell bash --config '~/.mytheme.omp.json')"
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+export PROMPT_DIRTRIM=3

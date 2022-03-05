@@ -1,0 +1,27 @@
+- link:
+    ~/:
+      relink: true
+      glob: true
+      path: bash/*
+      prefix: '.'
+    ~/.config/nvim/:
+      create: true
+      relink: true
+      glob: true
+      path: nvim/*
+- create:
+    - ~/.config/nvim/dein/
+
+- shell:
+    -
+      command: sudo apt install fzf ripgrep universal-ctags silversearcher-ag fd-find ruby ruby-dev clangd bear
+      description: Installing dependencies
+    -
+      command: sudo gem install solargraph
+      description: Installing solargraph (Ruby language server)
+    -
+      command: julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
+      description: Installing Julia language server
+    -
+      command: setup/dein_installer.sh ~/.config/nvim/dein/
+      description: Installing dein package manager for neovim
