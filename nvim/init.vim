@@ -9,6 +9,12 @@ set spell
 set splitright
 set list
 set listchars=trail:·
+set undofile
+set undodir=~/.config/nvim/.undo//
+set backup
+set backupdir=~/.config/nvim/.backup//
+
+
 let g:airline_theme='deus'
 let g:tex_flavor='latex'
 " From nvim-cmp.vim
