@@ -13,8 +13,10 @@ set undofile
 set undodir=~/.config/nvim/.undo//
 set backup
 set backupdir=~/.config/nvim/.backup//
+set modeline
 
 
+let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
 let g:tex_flavor='latex'
 " From nvim-cmp.vim
