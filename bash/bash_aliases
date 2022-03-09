@@ -1,3 +1,6 @@
+# Neovim modeline making filetype sh so that bashls works
+# vim: set filetype=sh:
+
 alias ..='cd ..'
 alias pd='pushd'
 alias pp='popd'
@@ -7,3 +10,4 @@ alias show_folder='explorer.exe .'
 alias python='python3'
 alias sandbox-c='code ~/Code/C/sandbox'
 alias sandbox-ruby='code ~/Code/Ruby/sandbox'
+alias luamake=$HOME/lua-language-server/3rd/luamake/luamake

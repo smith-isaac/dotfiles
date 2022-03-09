@@ -86,5 +86,6 @@ I.e.all dependencies or apps I need to install as part of this config
     - `.mytheme.omp.json`
 
 ## TODO
-- [ ] Document all dependencies and symlinks needed in README to make transition to dotbot easier
-- [ ] Use [DotBot](https://github.com/anishathalye/dotbot) to automate creating symlinks for my dotfiles
+- [ ] Figure out how to put [lua language server](https://github.com/sumneko/lua-language-server) into dotbot config
+- [ ] Figure out how to automate installation of node (i.e. `nvm install --lts`)
+- [ ] Install [Rust](https://rustup.rs/)

@@ -28,3 +28,9 @@
     -
       command: setup/oh_my_posh_setup
       description: Setting up Oh My Posh
+    -
+      command: wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+      description: Installing nvm in order to get node and npm
+    -
+      command: npm i -g bash-language-server vim-language-server
+      description: Installing bash and vim language servers
