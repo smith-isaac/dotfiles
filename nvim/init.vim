@@ -14,6 +14,7 @@ set undodir=~/.config/nvim/.undo//
 set backup
 set backupdir=~/.config/nvim/.backup//
 set modeline
+set clipboard+=unnamedplus
 
 
 let g:airline_powerline_fonts = 1
