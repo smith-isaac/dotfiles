@@ -17,7 +17,9 @@ set modeline
 set clipboard=unnamedplus
 set mouse=a
 
-
+" Setting spellcheck colors
+hi clear SpellBad
+hi SpellBad cterm=underline,standout
 
 
 let g:airline_powerline_fonts = 1
