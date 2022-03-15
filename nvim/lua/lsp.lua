@@ -1,4 +1,6 @@
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require("handlers").setup()
+
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
 local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'bashls', 'sumneko_lua', 'pyright'}
@@ -36,7 +38,8 @@ for _, lsp in ipairs(servers) do
                 }
               }
             },
-            capabilities = capabilities,
+            capabilities = require("handlers").capabilities,
+            on_attach = require("handlers").on_attach
         }
     elseif lsp == 'sumneko_lua' then
         lspconfig[lsp].setup {
@@ -62,11 +65,13 @@ for _, lsp in ipairs(servers) do
               },
             },
           },
-          capabilities = capabilities
+        capabilities = require("handlers").capabilities,
+        on_attach = require("handlers").on_attach
       }
     else
     lspconfig[lsp].setup {
-        capabilities = capabilities,
+        capabilities = require("handlers").capabilities,
+        on_attach = require("handlers").on_attach
     }
     end
 end
