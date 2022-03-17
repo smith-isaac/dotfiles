@@ -23,7 +23,6 @@ hi SpellBad cterm=underline,standout
 hi Pmenu ctermbg=8
 hi Pmenu ctermfg=7
 
-let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
 let g:tex_flavor='latex'
 " From nvim-cmp.vim
