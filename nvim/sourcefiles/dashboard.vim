@@ -31,45 +31,6 @@ EOF
 " \ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
 " \]
 
-" let g:dashboard_custom_header =<< EOF
-"                               ,▄▄  ▀████████▄▄▄,_
-"                          ▄▄███████▄  ▀█████████████▄▄
-"                      ,▄█████████████▄  ▀██████████████-
-"                    ▄███████████████████_ ▀████████████- ██▄
-"                  ▄███████████████████████▄ ▀██████████- ████▄
-"                 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀   ▀███████- ██████▄
-"               ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄═                  ▀█████- ████████
-"              ██████████████▀                      ▀███- █████████
-"             █████████████▀                          ▀█- ██████████
-"            ████████████▀                                ███████████
-"           ▐██████████`                                  ███████████
-"           ████████▀  ▄                                  █████████" ▄
-"           ██████▀  ▄██                                  ██████▀- ▄██
-"           ████▀  ▄████                                  ████▀  ▄████
-"           ██▀ ,███████                                  ██▀ _▄██████
-"           " ▄█████████                                  ` ,█████████
-"            ███████████                                  ▄██████████▌
-"            ███████████                                ▄████████████
-"             ██████████  █▄                          ▄█████████████
-"              █████████  ███▄_                    _▄██████████████
-"               ▀███████  ██████▄                 "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-"                '██████  ████████▄  ¥▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-"                  ▀████  ██████████▄  ▀██████████████████████▀
-"                    ▀▀█  ████████████▄  ▀██████████████████▀
-"                         ██████████████▄_ ▀█████████████▀
-"                           ▀▀█████████████, ▀██████▀▀'
-"                                `▀▀▀▀▀▀▀▀▀▀▀  '``
-" EOF
-
-
-" nmap <Leader>ss :<C-u>SessionSave<CR>
-" nmap <Leader>sl :<C-u>SessionLoad<CR>
-" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-" nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-" nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-" nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-" nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-" nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 
 let g:dashboard_custom_section={
         \ 'edit_init': {
@@ -85,7 +46,7 @@ let g:dashboard_custom_section={
             \ 'description': ['New file (<Space> n f)'],
             \ 'command': 'enew'},
         \ 'colors': {
-            \ 'description': ['Change colors (<Space> t c)'],
+            \ 'description': ['Change colors (<Space> v c)'],
             \ 'command': 'Colors'},
         \ 'recent': {
             \ 'description': ['Recent files (<Space> h)'],
