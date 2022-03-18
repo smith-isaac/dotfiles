@@ -25,5 +25,6 @@ hi Pmenu ctermfg=7
 
 let g:airline_theme='deus'
 let g:tex_flavor='latex'
+let g:tex_fold_enabled=1
 " From nvim-cmp.vim
 set completeopt=menu,menuone,noselect

@@ -10,6 +10,7 @@ autocmd FileType c,cpp,ruby nnoremap <buffer> <leader>es :exec "!exercism submit
 autocmd FileType markdown nnoremap <buffer> <leader>md :MarkdownPreviewToggle<cr>
 autocmd FileType tex nnoremap <buffer> <leader>ll :TexlabBuild<cr>
 autocmd FileType tex nnoremap <buffer> <silent> <leader>lv :silent exec "!xdg-open " . expand("%:r") . ".pdf"<cr>
+autocmd FileType tex nnoremap <buffer> <leader>lb :exec "!biber " . expand("%:r") . ".bcf"<cr>
 
 autocmd FileType ruby set shiftwidth=2
 autocmd FileType make set shiftwidth=4
