@@ -3,12 +3,13 @@ set number
 set rnu
 set scrolloff=8
 set sidescrolloff=8
+set softtabstop=4
 set shiftwidth=4
 set hidden
 set spell
 set splitright
 set list
-set listchars=trail:·
+set listchars=trail:·,tab:>-
 set undofile
 set undodir=~/.config/nvim/.undo//
 set backup
