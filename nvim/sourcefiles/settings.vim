@@ -8,6 +8,7 @@ set shiftwidth=4
 set hidden
 set spell
 set splitright
+set splitbelow
 set list
 set listchars=trail:·,tab:>-
 set undofile

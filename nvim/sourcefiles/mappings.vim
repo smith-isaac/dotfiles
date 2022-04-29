@@ -35,3 +35,7 @@ nnoremap <leader>bb :ls<cr>
 nnoremap <leader>bn :bn<cr>
 nnoremap <leader>bp :bp<cr>
 nnoremap <leader>bq :bd<cr>
+
+" Terminal mappings
+nnoremap <leader>vt :sp term://bash<cr>
+nnoremap <leader>vv :vsp term://bash<cr>
