@@ -17,4 +17,4 @@ autocmd FileType make set shiftwidth=4
 autocmd TermOpen * setlocal nonu
 autocmd TermOpen * setlocal nornu
 autocmd TermOpen * setlocal nospell
-tnoremap <Esc> <C-\><C-n>
+tnoremap <C-n> <C-\><C-n>
