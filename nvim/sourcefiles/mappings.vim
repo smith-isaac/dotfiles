@@ -37,5 +37,7 @@ nnoremap <leader>bp :bp<cr>
 nnoremap <leader>bq :bd<cr>
 
 " Terminal mappings
-nnoremap <leader>vt :sp term://bash<cr>
-nnoremap <leader>vv :vsp term://bash<cr>
+nnoremap <leader>vt :new term://bash<bar>resize 15<cr>
+nnoremap <leader>vv :vnew term://bash<cr>
+nnoremap <leader>jj :new<cr>:call termopen('julia')<bar>resize 15<cr>
+nnoremap <leader>jv :vnew<cr>:call termopen('julia')<cr>
