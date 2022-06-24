@@ -34,26 +34,26 @@ EOF
 
 let g:dashboard_custom_section={
         \ 'edit_init': {
-            \ 'description': ['Edit init.nvim (<Space> v e)'],
-            \ 'command': 'edit ~/.config/nvim/init.vim'},
+            \ 'desc': ['Edit init.nvim (<Space> v e)'],
+            \ 'action': 'edit ~/.config/nvim/init.vim'},
         \ 'source_init': {
-            \ 'description': ['Source init.nvim (<Space> v r)'],
-            \ 'command': 'source ~/.config/nvim/init.vim'},
+            \ 'desc': ['Source init.nvim (<Space> v r)'],
+            \ 'action': 'source ~/.config/nvim/init.vim'},
         \ 'find_file': {
-            \ 'description': ['Find file in dir (<Space> o)'],
-            \ 'command': 'Files'},
+            \ 'desc': ['Find file in dir (<Space> o)'],
+            \ 'action': 'Files'},
         \ 'new_file': {
-            \ 'description': ['New file (<Space> n f)'],
-            \ 'command': 'enew'},
+            \ 'desc': ['New file (<Space> n f)'],
+            \ 'action': 'enew'},
         \ 'colors': {
-            \ 'description': ['Change colors (<Space> v c)'],
-            \ 'command': 'Colors'},
+            \ 'desc': ['Change colors (<Space> v c)'],
+            \ 'action': 'Colors'},
         \ 'recent': {
-            \ 'description': ['Recent files (<Space> h)'],
-            \ 'command': 'History'},
+            \ 'desc': ['Recent files (<Space> h)'],
+            \ 'action': 'History'},
         \ 'git': {
-            \ 'description': ['Open git (<Space> g)'],
-            \ 'command': 'Git'},
+            \ 'desc': ['Open git (<Space> g)'],
+            \ 'action': 'Git'},
             \}
 
 " let g:dashboard_custom_footer = ['']

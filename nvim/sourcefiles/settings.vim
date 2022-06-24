@@ -18,6 +18,7 @@ set backupdir=~/.config/nvim/.backup//
 set modeline
 set clipboard=unnamedplus
 set mouse=a
+set termguicolors
 
 " Setting spellcheck colors
 hi clear SpellBad

@@ -27,6 +27,7 @@ call dein#add("rafamadriz/friendly-snippets")
 call dein#add('saadparwaiz1/cmp_luasnip')
 call dein#add('glepnir/dashboard-nvim')
 call dein#add('JuliaEditorSupport/julia-vim')
+call dein#add('catppuccin/nvim', {'as': 'catppuccin'})
 
 call dein#end()
 
