@@ -129,6 +129,8 @@ fi
 
 export EDITOR='vi'
 export VISUAL='vi'
+# export MANPAGER='/opt/nvim-linux64/bin/nvim --clean +Man!'
+export MANPAGER='nvim --clean +Man!'
 set -o vi
 export PATH="/home/isaacsmith/.local/bin:$PATH"
 #export PATH="/home/isaacsmith/nvim-linux64/bin:$PATH"
