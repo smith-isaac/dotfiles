@@ -3,51 +3,16 @@ Config files for zsh, bash, nvim, etc
 
 #### This is my branch for redoing the config files for CMP and Lsp-config
 
-If I then create symbolic links to the dot files in this repository then I
-won't have copies everywhere
+## Packages to install manually
+- Ruby (`ruby`, `ruby-dev`, `solargraph`)
+- C/C++ (`gcc`, `clangd`, `bear`)
+- Python (`python3`, `pyright`)
+- Julia (`julia`, Julials)
+- LaTeX (`texlive`, TexLab)
+- [Neovim](https://neovim.io/) (`fzf`, `ripgrep`, `universal-ctags`, `silversearcher-ag`, `fd-find`)
+- [Node](https://nodejs.org/en/)
 
-i.e.
-
-    ln -s /path/in/repo /path/to/config/file
-
-Made `setup.sh` file that sets up symbolic links. Has to be run from
-`dotfiles/nvim` directory. Run as follows:
-
-    ./setup.sh
-
-May have to run `chmod +x setup.sh` first
-
-Made `install-deps.sh` to install dependencies. Run as follows:
-
-    chmod +x install-deps.sh && sudo ./install-deps.sh
-
-## Requirements Packages to install that are necessary for the following plugins
-
-Dein:
-Need to make an install directory for `dein.vim` to work. I configured `install_deps.sh` to install `node` so that `markdown-preview.nvim` will work.
-Run `dein_installer.sh` using new directory.
-
-    mkdir ~/.config/nvim/dein
-    ./dein_installer.sh ~/.config/nvim/dein
-
-Fzf: fzf, ripgrep, universal-ctags, silversearcher-ag, fd-find
-
-    sudo apt install fzf ripgrep universal-ctags silversearcher-ag fd-find
-
-Lsp-config:
-- Ruby: `gem install solargraph`
-- C/C++: `sudo apt install clangd bear`
-- Python: (pyright through npm) `sudo apt install npm && sudo npm install -g
-  pyright`
-
-Julia:
-- Run the following in order to get the `julials` language server running correctly
-
-```julia
-julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
-```
-
-### Deps
+### Deps for Neovim's Language Server Protocol
 ---
 I.e.all dependencies or apps I need to install as part of this config
 - Neovim and plugins
@@ -68,23 +33,19 @@ I.e.all dependencies or apps I need to install as part of this config
         - After extracting, create symlink to $PATH so that julia can be run from anywhere (i.e. `/usr/local/bin`)
         - `julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'`
     - [TexLab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#texlab)
-        - Rust (>= 1.53)
- 
- ### Symlinks
- ---
- - Neovim (all symlinks will be pointing to `~/.config/nvim/`)
-    - Create `~/.config/nvim` directory and `~/.config/nvim/dein` subdirectory
-        - Can likely be done by `mkdir -p ~/.config/nvim/dein`
-    - `init.vim`
-    - `lua`
-    - `sourcefiles`
-- Bash (all linked to `~/`)
-    - `.bashrc`
-    - `.bash_aliases`
-    - `git-completion.bash`
-    - `git-prompt.sh`
+        - Use [precompiled binaries](https://github.com/latex-lsp/texlab/releases)
+    - [Vimls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vimls)
+        - Can install vim-language-server via npm
+        - `npm install -g vim-language-server`
+    - [Bashls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls)
+        - `bash-language-server` can be installed via `npm`
+        - `npm i -g bash-language-server`
+    - [sumneko_lua](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua)
+        - Can download [precompiled binaries](https://github.com/sumneko/lua-language-server/releases) of lua-language-server
+    - [Pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright)
+        - Can install with `npm`
+        - `npm install -g pyright`
 
 ## TODO
-- [ ] Figure out how to put [lua language server](https://github.com/sumneko/lua-language-server) into dotbot config
-- [ ] Figure out how to automate installation of node (i.e. `nvm install --lts`)
-- [ ] Install [Rust](https://rustup.rs/)
+- [ ] Use install script to place all precompiled binaries (like for Lua and TexLab) into a separate folder and use those instead
+    - Then add the path to that folder in the `bash/bashrc`

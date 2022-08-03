@@ -14,20 +14,11 @@
 
 - shell:
     -
-      command: sudo apt install fzf ripgrep universal-ctags silversearcher-ag fd-find ruby ruby-dev clangd bear
-      description: Installing dependencies
-    -
-      command: sudo gem install solargraph
-      description: Installing solargraph (Ruby language server)
-    -
       command: julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
       description: Installing Julia language server
     -
       command: setup/dein_installer.sh ~/.config/nvim/dein/
       description: Installing dein package manager for neovim
     -
-      command: wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-      description: Installing nvm in order to get node and npm
-    -
-      command: npm i -g bash-language-server vim-language-server
-      description: Installing bash and vim language servers
+      command: npm i -g bash-language-server vim-language-server pyright
+      description: Installing bash and vim language servers and pyright
