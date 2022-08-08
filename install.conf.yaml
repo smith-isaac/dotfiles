@@ -9,6 +9,11 @@
       relink: true
       glob: true
       path: nvim/*
+    ~/.config/kitty/:
+      create: true
+      relink: true
+      glob: true
+      path: kitty/*
 - create:
     - ~/.config/nvim/dein/
 
