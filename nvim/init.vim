@@ -9,6 +9,7 @@ lua require("nvim-cmp")
 lua require("lsp")
 lua require("plugins.dashboard")
 lua require("catppuccin")
+lua require("tree-sitter")
 
 let g:catppuccin_flavour = "macchiato"
 colorscheme catppuccin
