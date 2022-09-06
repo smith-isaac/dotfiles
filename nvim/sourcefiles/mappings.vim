@@ -24,6 +24,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+nnoremap <C--> <C-w>-
+nnoremap <C-=> <C-w>+
+
 " Tab mappings
 nnoremap <C-Left> gT
 nnoremap <C-Right> gt
