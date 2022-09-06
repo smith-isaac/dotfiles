@@ -17,4 +17,5 @@ autocmd FileType make set shiftwidth=4
 autocmd TermOpen * setlocal nonu
 autocmd TermOpen * setlocal nornu
 autocmd TermOpen * setlocal nospell
+autocmd TermOpen * startinsert
 tnoremap <C-n> <C-\><C-n>
