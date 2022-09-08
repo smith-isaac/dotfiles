@@ -1,0 +1,6 @@
+# vim: set filetype=sh:
+#!/usr/bin/env bash
+rm -f $HOME/Downloads/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz -P $HOME/Downloads
+rm -rf /opt/nvim-linux64
+tar -zxvf $HOME/Downloads/nvim-linux64.tar.gz -C /opt/
