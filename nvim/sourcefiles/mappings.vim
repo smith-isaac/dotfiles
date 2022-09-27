@@ -11,7 +11,8 @@ map gf :edit <cfile><cr>
 vnoremap < <gv
 vnoremap > >gv
 nmap <leader>g :Git<cr>
-nmap <leader>p :Git push<cr>
+" nmap <leader>p :Git push<cr>
+xnoremap <leader>p "_dp
 nmap <leader>o :Files<cr>
 nmap <leader>ff :GFiles<cr>
 nmap <leader>h :History<cr>

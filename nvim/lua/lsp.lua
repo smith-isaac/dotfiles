@@ -3,7 +3,7 @@ require("handlers").setup()
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
-local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'bashls', 'sumneko_lua', 'pyright'}
+local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'bashls', 'sumneko_lua', 'pyright', 'csharp_ls'}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
