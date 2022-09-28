@@ -1,6 +1,7 @@
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 local luasnip = require 'luasnip'
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/"})
 
 local kind_icons = {
   Text = "",
