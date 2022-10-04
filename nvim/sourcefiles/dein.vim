@@ -28,6 +28,8 @@ call dein#add('saadparwaiz1/cmp_luasnip')
 call dein#add('glepnir/dashboard-nvim')
 call dein#add('JuliaEditorSupport/julia-vim')
 call dein#add('catppuccin/nvim', {'as': 'catppuccin'})
+call dein#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': 'TSUpdate'})
+call dein#add('nvim-treesitter/nvim-treesitter-context')
 
 call dein#end()
 
