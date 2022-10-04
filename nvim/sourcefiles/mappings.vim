@@ -12,11 +12,14 @@ vnoremap < <gv
 vnoremap > >gv
 nmap <leader>g :Git<cr>
 " nmap <leader>p :Git push<cr>
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope git_files<cr>
+nnoremap <leader>fj <cmd>Telescope jumplist<cr>
+nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+nnoremap <leader>fb <cmd>Telescope file_browser<cr>
+
 xnoremap <leader>p "_dP
-nmap <leader>o :Files<cr>
-nmap <leader>ff :GFiles<cr>
-nmap <leader>h :History<cr>
-nmap <leader>vc :Colors<cr>
 nmap <silent> <leader>nf :enew<cr>
 nmap <leader>d :pwd<cr>
 

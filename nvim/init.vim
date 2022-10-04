@@ -10,6 +10,7 @@ lua require("lsp")
 lua require("plugins.dashboard")
 lua require("catppuccin")
 lua require("tree-sitter")
+lua require("telescope-config")
 
 let g:catppuccin_flavour = "macchiato"
 colorscheme catppuccin
