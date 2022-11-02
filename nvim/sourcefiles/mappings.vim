@@ -13,10 +13,10 @@ vnoremap > >gv
 nmap <leader>g :Git<cr>
 " nmap <leader>p :Git push<cr>
 
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>o <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope git_files<cr>
 nnoremap <leader>fj <cmd>Telescope jumplist<cr>
-nnoremap <leader>fo <cmd>Telescope oldfiles<cr>
+nnoremap <leader>h <cmd>Telescope oldfiles<cr>
 nnoremap <leader>fb <cmd>Telescope file_browser<cr>
 
 xnoremap <leader>p "_dP
