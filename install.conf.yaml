@@ -14,16 +14,11 @@
       relink: true
       glob: true
       path: kitty/*
-- create:
-    - ~/.config/nvim/dein/
 
 - shell:
     -
       command: julia --project=~/.julia/environments/nvim-lspconfig -e 'using Pkg; Pkg.add("LanguageServer")'
       description: Installing Julia language server
-    -
-      command: setup/dein_installer.sh ~/.config/nvim/dein/
-      description: Installing dein package manager for neovim
     -
       command: npm i -g bash-language-server vim-language-server pyright
       description: Installing bash and vim language servers and pyright
