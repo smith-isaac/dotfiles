@@ -1,4 +1,5 @@
-require("handlers").setup()
+local handlers = require("isaac.handlers")
+handlers.setup()
 
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
@@ -38,8 +39,8 @@ for _, lsp in ipairs(servers) do
                 }
               }
             },
-            capabilities = require("handlers").capabilities,
-            on_attach = require("handlers").on_attach
+            capabilities = handlers.capabilities,
+            on_attach = handlers.on_attach
         }
     elseif lsp == 'sumneko_lua' then
         lspconfig[lsp].setup {
@@ -65,13 +66,13 @@ for _, lsp in ipairs(servers) do
               },
             },
           },
-        capabilities = require("handlers").capabilities,
-        on_attach = require("handlers").on_attach
+        capabilities = handlers.capabilities,
+        on_attach = handlers.on_attach
       }
     else
     lspconfig[lsp].setup {
-        capabilities = require("handlers").capabilities,
-        on_attach = require("handlers").on_attach
+        capabilities = handlers.capabilities,
+        on_attach = handlers.on_attach
     }
     end
 end
