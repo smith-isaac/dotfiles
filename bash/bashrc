@@ -150,3 +150,4 @@ export NVM_DIR="$HOME/.nvm"
 export PROMPT_DIRTRIM=3
 
 bind -x '"\C-f":". $HOME/change-dir"'
+. "$HOME/.cargo/env"
