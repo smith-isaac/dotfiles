@@ -4,7 +4,7 @@ handlers.setup()
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
-local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'bashls', 'sumneko_lua', 'pyright', 'csharp_ls', 'arduino_language_server'}
+local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'bashls', 'sumneko_lua', 'pyright', 'csharp_ls', 'arduino_language_server', 'rust_analyzer'}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -54,7 +54,7 @@ for _, lsp in ipairs(servers) do
               },
               diagnostics = {
                 -- Get the language server to recognize the `vim` global
-                globals = {'vim'},
+                globals = {'vim', 'os', 'string', 'table', 'io', 'ipairs'},
               },
               workspace = {
                 -- Make the server aware of Neovim runtime files
