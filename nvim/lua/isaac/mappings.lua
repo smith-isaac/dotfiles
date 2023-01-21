@@ -11,7 +11,7 @@ vim.keymap.set('n', '<leader>d', ':pwd<cr>')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
-vim.keymap.set('v', '<leader>p', '"_dP')
+vim.keymap.set('n', '<leader>p', 'pgqq')
 
 -- Split
 vim.keymap.set('n', '<C-h>', '<C-w>h')
@@ -41,3 +41,6 @@ vim.keymap.set('n', '<leader>vv', ':vnew term://bash<cr>')
 vim.keymap.set('n', '<leader>jj', ':new<cr>:call termopen("julia")<bar>resize 15<cr>')
 vim.keymap.set('n', '<leader>jv', ':vnew<cr>:call termopen("julia")<cr>')
 vim.keymap.set('t', '<C-n>', '<C-\\><C-n>')
+
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
