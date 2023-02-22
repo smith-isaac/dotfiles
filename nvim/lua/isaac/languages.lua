@@ -4,6 +4,84 @@ local function c_maps()
     vim.keymap.set('n', '<leader>mm', ':!make<cr>', {buffer = true})
     vim.keymap.set('n', '<leader>mt', ':!make test<cr>', {buffer = true})
     vim.keymap.set('n', '<leader>mc', ':!make clean<cr>', {buffer = true})
+
+    vim.api.nvim_create_user_command("PicoBuild", function()
+        vim.cmd 'vnew'
+        local bufnr = vim.api.nvim_get_current_buf()
+        local win = vim.api.nvim_get_current_win()
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+
+        local group_id = vim.api.nvim_create_augroup("Pico auto make", {clear = true})
+        local autocmd_nr = vim.api.nvim_create_autocmd("BufWritePost", {
+            group = group_id,
+            pattern = "*.c",
+            callback = function()
+                local append_data = function(_, data)
+                    if data then
+                        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+                        vim.api.nvim_win_set_cursor(win, {vim.api.nvim_buf_line_count(bufnr), 0})
+                        vim.bo[bufnr].modified = false
+                    end
+                end
+
+                vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {"Building " .. vim.fn.expand('%') .. ":"})
+                vim.fn.jobstart("if [ -d build ]; then cd build && make ; else echo \"Please run Cmake first\" ; fi", {
+                    stdout_buffered = false,
+                    on_stdout = append_data,
+                    on_stderr = append_data
+                })
+            end
+        })
+
+        vim.api.nvim_create_autocmd("BufHidden", {
+            group = group_id,
+            buffer = bufnr,
+            callback = function()
+                vim.api.nvim_del_autocmd(autocmd_nr)
+            end
+        })
+    end, {})
+end
+
+local function cmake_maps()
+    vim.api.nvim_create_user_command("CmakeBuild", function()
+        vim.cmd 'vnew'
+        local bufnr = vim.api.nvim_get_current_buf()
+        local win = vim.api.nvim_get_current_win()
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+
+        local group_id = vim.api.nvim_create_augroup("Cmake auto build", {clear = true})
+        local autocmd_nr = vim.api.nvim_create_autocmd("BufWritePost", {
+            group = group_id,
+            pattern = "CMakeLists.txt",
+            callback = function()
+                local append_data = function(_, data)
+                    if data then
+                        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
+                        vim.api.nvim_win_set_cursor(win, {vim.api.nvim_buf_line_count(bufnr), 0})
+                        vim.bo[bufnr].modified = false
+                    end
+                end
+
+                vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {"Building cmake"})
+                vim.fn.jobstart("mkdir -p build ; cd build ; rm -rf * ; cmake ..", {
+                    stdout_buffered = true,
+                    on_stdout = append_data,
+                    on_stderr = append_data
+                })
+            end
+        })
+
+        vim.api.nvim_create_autocmd("BufHidden", {
+            group = group_id,
+            buffer = bufnr,
+            callback = function()
+                vim.api.nvim_del_autocmd(autocmd_nr)
+            end
+        })
+    end, {})
 end
 
 local function ViewPDF(file)
@@ -48,5 +126,6 @@ M.c = c_maps
 M.tex = tex_maps
 M.lua = lua_maps
 M.rust = rust_maps
+M.cmake = cmake_maps
 
 return M
