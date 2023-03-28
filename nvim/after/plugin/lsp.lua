@@ -4,7 +4,7 @@ handlers.setup()
 -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
-local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'bashls', 'sumneko_lua', 'pyright', 'csharp_ls', 'arduino_language_server', 'rust_analyzer'}
+local servers = { 'solargraph', 'clangd', 'texlab', 'julials', 'vimls', 'lua_ls', 'bashls', 'pyright', 'csharp_ls', 'arduino_language_server', 'rust_analyzer', 'html'}
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
@@ -42,30 +42,28 @@ for _, lsp in ipairs(servers) do
             capabilities = handlers.capabilities,
             on_attach = handlers.on_attach
         }
-    elseif lsp == 'sumneko_lua' then
+    elseif lsp == 'lua_ls' then
         lspconfig[lsp].setup {
             settings = {
-            Lua = {
-              runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = runtime_path,
+                Lua = {
+                  runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                  },
+                  diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {'vim'},
+                  },
+                  workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true),
+                  },
+                  -- Do not send telemetry data containing a randomized but unique identifier
+                  telemetry = {
+                    enable = false,
+                  },
+                },
               },
-              diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {'vim', 'os', 'string', 'table', 'io', 'ipairs'},
-              },
-              workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-              },
-              -- Do not send telemetry data containing a randomized but unique identifier
-              telemetry = {
-                enable = false,
-              },
-            },
-          },
         capabilities = handlers.capabilities,
         on_attach = handlers.on_attach
       }
@@ -75,7 +73,16 @@ for _, lsp in ipairs(servers) do
                 "arduino-language-server",
                 "-cli-config", "$HOME/.arduino15/arduino-cli.yaml",
                 "-cli", "arduino-cli",
-                "-clangd", "clangd"
+                "-clangd", "clangd",
+            },
+        capabilities = handlers.capabilities,
+        on_attach = handlers.on_attach
+        }
+    elseif lsp == 'clangd' then
+        lspconfig[lsp].setup {
+            cmd = {
+                'clangd',
+                '--header-insertion=never'
             },
         capabilities = handlers.capabilities,
         on_attach = handlers.on_attach
