@@ -74,6 +74,8 @@ for _, lsp in ipairs(servers) do
                 "-cli-config", "$HOME/.arduino15/arduino-cli.yaml",
                 "-cli", "arduino-cli",
                 "-clangd", "clangd",
+                -- Toggle the line below to enable logging of the arduino language server for troubleshooting
+                -- "-log"
             },
         capabilities = handlers.capabilities,
         on_attach = handlers.on_attach

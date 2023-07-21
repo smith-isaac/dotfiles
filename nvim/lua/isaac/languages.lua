@@ -5,43 +5,68 @@ local function c_maps()
     vim.keymap.set('n', '<leader>mt', ':!make test<cr>', {buffer = true})
     vim.keymap.set('n', '<leader>mc', ':!make clean<cr>', {buffer = true})
 
-    vim.api.nvim_create_user_command("PicoBuild", function()
-        vim.cmd 'vnew'
-        local bufnr = vim.api.nvim_get_current_buf()
-        local win = vim.api.nvim_get_current_win()
-        vim.wo.number = false
-        vim.wo.relativenumber = false
+    -- Pico keybindings should only work under a top-level folder named 'Pico'
+    if string.match(vim.fn.expand('%:p'), 'Pico') then
+        vim.api.nvim_create_user_command("PicoBuild", function()
+            vim.cmd 'vnew'
+            local bufnr = vim.api.nvim_get_current_buf()
+            local win = vim.api.nvim_get_current_win()
+            vim.wo.number = false
+            vim.wo.relativenumber = false
 
-        local group_id = vim.api.nvim_create_augroup("Pico auto make", {clear = true})
-        local autocmd_nr = vim.api.nvim_create_autocmd("BufWritePost", {
-            group = group_id,
-            pattern = "*.c",
-            callback = function()
-                local append_data = function(_, data)
-                    if data then
-                        vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
-                        vim.api.nvim_win_set_cursor(win, {vim.api.nvim_buf_line_count(bufnr), 0})
-                        vim.bo[bufnr].modified = false
+            local group_id = vim.api.nvim_create_augroup("Pico auto make", {clear = true})
+            local autocmd_nr = vim.api.nvim_create_autocmd("BufWritePost", {
+                group = group_id,
+                pattern = "*.c",
+                callback = function()
+                    local append_data = function(_, data)
+                        if data then
+                            local data_no_empty = {}
+                            for _,v in pairs(data) do
+                                if v ~= "" then
+                                    data_no_empty[#data_no_empty+1] = v
+                                end
+                            end
+                            vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data_no_empty)
+                            vim.api.nvim_win_set_cursor(win, {vim.api.nvim_buf_line_count(bufnr), 0})
+                            vim.bo[bufnr].modified = false
+                        end
                     end
+
+                    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {"Building " .. vim.fn.expand('%') .. ":"})
+                    vim.fn.jobstart("if [ -d build ]; then cd build && make ; else echo \"Please run Cmake first\" ; fi", {
+                        stdout_buffered = false,
+                        on_stdout = append_data,
+                        on_stderr = append_data
+                    })
                 end
+            })
 
-                vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {"Building " .. vim.fn.expand('%') .. ":"})
-                vim.fn.jobstart("if [ -d build ]; then cd build && make ; else echo \"Please run Cmake first\" ; fi", {
-                    stdout_buffered = false,
-                    on_stdout = append_data,
-                    on_stderr = append_data
-                })
-            end
-        })
+            vim.api.nvim_create_autocmd("BufHidden", {
+                group = group_id,
+                buffer = bufnr,
+                callback = function()
+                    vim.api.nvim_del_autocmd(autocmd_nr)
+                end
+            })
+        end, {})
 
-        vim.api.nvim_create_autocmd("BufHidden", {
-            group = group_id,
-            buffer = bufnr,
-            callback = function()
-                vim.api.nvim_del_autocmd(autocmd_nr)
-            end
-        })
-    end, {})
+        vim.api.nvim_create_user_command("PicoListPorts", function()
+            print(vim.cmd '!julia -e "using LibSerialPort;list_ports()"')
+        end, {})
+
+        vim.api.nvim_create_user_command("PicoSerialMonitor", function()
+            vim.cmd 'vnew'
+            local win = vim.api.nvim_get_current_win()
+            local buf = vim.api.nvim_create_buf(true, true)
+            vim.api.nvim_win_set_buf(win, buf)
+            vim.fn.termopen("minicom -D /dev/ttyACM0 -b 115200", {
+                on_exit = function()
+                    print("Serial monitor closed")
+                end
+            })
+        end, {})
+    end
 end
 
 local function cmake_maps()
