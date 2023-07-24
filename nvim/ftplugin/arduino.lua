@@ -22,20 +22,6 @@ function List_boards()
     print(vim.cmd '!arduino-cli board listall')
 end
 
-function Attach_board()
-    List_ports()
-    local port = vim.fn.input 'Select Port: '
-    List_boards()
-    local board = vim.fn.input 'Select Board: '
-    if not port or not board then
-        print("failed to attach board")
-        return
-    end
-    vim.cmd('!arduino-cli board attach -p ' .. port .. ' -b ' .. board)
-end
-
-vim.api.nvim_create_user_command("AttachBoard", Attach_board, {})
-
 vim.api.nvim_create_user_command("SerialMonitor", function()
     Port = Auto_get_port()
     if not Port then
@@ -220,3 +206,6 @@ vim.api.nvim_create_user_command("GetSketchInfo", function()
     print("Port: " .. Auto_get_port())
     print("Baud: " .. Auto_get_baud())
 end, {})
+
+
+vim.api.nvim_create_user_command("AttachBoard", function() require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/attach_arduino.jl") end, {nargs = 0})

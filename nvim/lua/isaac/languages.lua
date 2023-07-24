@@ -7,6 +7,7 @@ local function c_maps()
 
     -- Pico keybindings should only work under a top-level folder named 'Pico'
     if string.match(vim.fn.expand('%:p'), 'Pico') then
+        Pico_Port = "/dev/ttyACM0"
         vim.api.nvim_create_user_command("PicoBuild", function()
             vim.cmd 'vnew'
             local bufnr = vim.api.nvim_get_current_buf()
@@ -52,7 +53,28 @@ local function c_maps()
         end, {})
 
         vim.api.nvim_create_user_command("PicoListPorts", function()
-            print(vim.cmd '!julia -e "using LibSerialPort;list_ports()"')
+            print(vim.cmd("!julia -e 'using LibSerialPort;list_ports()'"))
+        end, {})
+
+        vim.api.nvim_create_user_command("PicoSetPort", function()
+            print(vim.cmd("!julia -e 'using LibSerialPort;list_ports()'"))
+
+            local ports_str = vim.fn.system("julia -e 'using LibSerialPort; for port in get_port_list() println(port) end'")
+
+            local ports = {}
+            for s in string.gmatch(ports_str, "[^\r\n]+") do
+                table.insert(ports, s)
+            end
+
+            for k,v in pairs(ports) do
+                print(k .. ': ' .. v)
+            end
+
+            local port_num = vim.fn.input('Select Port: ')
+
+            if ports[port_num] then
+                Pico_Port = ports[port_num]
+            end
         end, {})
 
         vim.api.nvim_create_user_command("PicoSerialMonitor", function()
@@ -60,7 +82,7 @@ local function c_maps()
             local win = vim.api.nvim_get_current_win()
             local buf = vim.api.nvim_create_buf(true, true)
             vim.api.nvim_win_set_buf(win, buf)
-            vim.fn.termopen("minicom -D /dev/ttyACM0 -b 115200", {
+            vim.fn.termopen("minicom -D " .. Pico_Port .. " -b 115200", {
                 on_exit = function()
                     print("Serial monitor closed")
                 end
