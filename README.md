@@ -1,5 +1,6 @@
 # dotfiles
 Config files for zsh, bash, nvim, etc
+**Note** I typically will symlink binaries to `/usr/local/bin` instead of adding to `PATH`
 
 #### This is my branch for redoing the config files for CMP and Lsp-config
 
