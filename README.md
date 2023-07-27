@@ -5,7 +5,7 @@ Config files for zsh, bash, nvim, etc
 
 ## Packages to install manually
 - Ruby (`ruby`, `ruby-dev`, `solargraph`)
-- C/C++ (`gcc`, `clangd`, `bear`)
+- C/C++ (`gcc`, `clangd`)
 - Python (`python3`, `pyright`)
 - Julia (`julia`, Julials)
 - LaTeX (`texlive`, TexLab)
@@ -14,14 +14,13 @@ Config files for zsh, bash, nvim, etc
 
 ### Deps for Neovim's Language Server Protocol
 ---
-I.e.all dependencies or apps I need to install as part of this config
+I.e.all dependencies or apps I need to install as part of this config (Refer to
+[nvim-lspconfig common
+configurations](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md)
+for all common language servers)
 - Neovim and plugins
-    - `fzf`
     - `ripgrep`
-    - `universal-ctags`
-    - `silversearcher-ag`
-    - `fd-find`
-    - Markdown previewer
+    - Markdown previewer (This one should install itself)
 - Language Servers
     - [Solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph) (Ruby)
         - `gem install solargraph` after `sudo apt install ruby ruby-dev`
@@ -40,12 +39,16 @@ I.e.all dependencies or apps I need to install as part of this config
     - [Bashls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls)
         - `bash-language-server` can be installed via `npm`
         - `npm i -g bash-language-server`
-    - [sumneko_lua](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua)
+    - [luals](https://github.com/luals/lua-language-server)
         - Can download [precompiled binaries](https://github.com/sumneko/lua-language-server/releases) of lua-language-server
     - [Pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright)
         - Can install with `npm`
         - `npm install -g pyright`
+    - [Arduino-Language-Server](https://github.com/arduino/arduino-language-server)
+        - Requires sketch.yaml file in sketch dir to contain FQBN in order to work
 
 ## TODO
 - [ ] Use install script to place all precompiled binaries (like for Lua and TexLab) into a separate folder and use those instead
     - Then add the path to that folder in the `bash/bashrc`
+    - Maybe just use instructions for the language server parts
+- [ ] Add docs for all mappings (global and language-specific)
