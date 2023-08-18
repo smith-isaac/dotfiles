@@ -11,7 +11,7 @@ vim.keymap.set('n', '<leader>d', ':pwd<cr>')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
-vim.keymap.set('n', '<leader>p', 'pgqq')
+vim.keymap.set('n', '<leader>p', 'p`[gq`]')
 
 -- Split
 vim.keymap.set('n', '<C-h>', '<C-w>h')

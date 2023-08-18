@@ -149,10 +149,28 @@ export NVM_DIR="$HOME/.nvm"
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 export PROMPT_DIRTRIM=3
 
-bind -x '"\C-f":". $HOME/change-dir"'
+bind -x '"\C-f":"$HOME/.local/bin/tmux_sessionizer"'
 export PICO_SDK_PATH=/home/isaacsmith/pico/pico-sdk
 export PICO_EXAMPLES_PATH=/home/isaacsmith/pico/pico-examples
 export PICO_EXTRAS_PATH=/home/isaacsmith/pico/pico-extras
 export PICO_PLAYGROUND_PATH=/home/isaacsmith/pico/pico-playground
 . "$HOME/.cargo/env"
 
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+case ":$PATH:" in
+    *:/home/isaacsmith/.juliaup/bin:*)
+        ;;
+
+    *)
+        export PATH=/home/isaacsmith/.juliaup/bin${PATH:+:${PATH}}
+        ;;
+esac
+
+# <<< juliaup initialize <<<
+
+# Bind capslock key to another escape key
+setxkbmap -option "caps:escape"
