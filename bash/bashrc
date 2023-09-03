@@ -154,7 +154,6 @@ export PICO_SDK_PATH=/home/isaacsmith/pico/pico-sdk
 export PICO_EXAMPLES_PATH=/home/isaacsmith/pico/pico-examples
 export PICO_EXTRAS_PATH=/home/isaacsmith/pico/pico-extras
 export PICO_PLAYGROUND_PATH=/home/isaacsmith/pico/pico-playground
-. "$HOME/.cargo/env"
 
 
 # >>> juliaup initialize >>>
@@ -172,5 +171,6 @@ esac
 
 # <<< juliaup initialize <<<
 
-# Bind capslock key to another escape key
-setxkbmap -option "caps:escape"
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    exec tmux
+fi
