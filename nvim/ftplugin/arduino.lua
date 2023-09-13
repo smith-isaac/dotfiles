@@ -23,7 +23,7 @@ function List_boards()
 end
 
 vim.api.nvim_create_user_command("SerialMonitor", function()
-    Port = Auto_get_port()
+    Port = Auto_get_port(vim.fn.expand('%:h'))
     if not Port then
         Port = Get_port()
     end
@@ -141,7 +141,7 @@ vim.api.nvim_create_user_command("ArduinoAutoCompile", function()
 
             vim.api.nvim_buf_set_lines(bufnr, 0, -1, false,
                 {"Compiling " .. vim.fn.expand('%') .. " and uploading"})
-            vim.fn.jobstart("arduino-cli compile -u --no-color", {
+            vim.fn.jobstart("arduino-cli compile -u --no-color " .. vim.fn.expand('%'), {
                 stdout_buffered = false,
                 on_stdout = append_data,
                 on_stderr = append_data
@@ -173,8 +173,8 @@ function lines_from(file)
     return lines
 end
 
-function Auto_get_port()
-    local file = 'sketch.yaml'
+function Auto_get_port(path)
+    local file = path .. '/sketch.yaml'
 
     if not file_exists(file) then
         print("sketch.yaml not found")
@@ -208,4 +208,8 @@ vim.api.nvim_create_user_command("GetSketchInfo", function()
 end, {})
 
 
-vim.api.nvim_create_user_command("AttachBoard", function() require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/attach_arduino.jl") end, {nargs = 0})
+-- vim.api.nvim_create_user_command("AttachBoard", function() require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/attach_arduino.jl") end, {nargs = 0})
+vim.api.nvim_create_user_command("AttachBoard", function()
+    require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/arduino_attach.jl " .. vim.fn.expand('%'))
+    vim.cmd 'LspRestart'
+end, {nargs = 0})
