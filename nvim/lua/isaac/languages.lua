@@ -169,10 +169,48 @@ local function rust_maps()
     end
 end
 
+local function julia_maps()
+    -- if Julia_REPL_id == nil then
+    --     Julia_REPL_id = 0
+    -- end
+
+    local function start_REPL()
+        vim.cmd 'vnew'
+        local win = vim.api.nvim_get_current_win()
+        local buf = vim.api.nvim_create_buf(true, true)
+        vim.api.nvim_win_set_buf(win, buf)
+        Julia_REPL_id = vim.fn.termopen("julia", {
+            on_exit = function()
+                Julia_REPL_id = nil
+                print("Julia REPL closed")
+            end
+        })
+    end
+
+    vim.api.nvim_create_user_command("REPL", function() start_REPL() end, {})
+
+    local function write_to_repl(cmd)
+        if Julia_REPL_id ~= nil then
+            vim.api.nvim_chan_send(Julia_REPL_id, cmd .. "\n")
+        end
+    end
+
+    local function run_file_in_repl(file)
+        if Julia_REPL_id == nil then
+            start_REPL()
+        end
+        vim.api.nvim_chan_send(Julia_REPL_id, "include(\"" .. file .. "\")\n")
+    end
+
+    vim.keymap.set('n', '<leader>r', function() run_file_in_repl(vim.fn.expand('%')) end, {buffer = true})
+
+end
+
 M.c = c_maps
 M.tex = tex_maps
 M.lua = lua_maps
 M.rust = rust_maps
 M.cmake = cmake_maps
+M.julia = julia_maps
 
 return M
