@@ -48,3 +48,5 @@ vim.keymap.set('t', '<C-n>', '<C-\\><C-n>')
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'gl', function() vim.diagnostic.open_float() end)
+vim.keymap.set('n', 'gk', function() vim.lsp.buf.hover() end)

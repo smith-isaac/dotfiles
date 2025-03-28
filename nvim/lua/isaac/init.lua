@@ -1,3 +1,6 @@
 require("isaac.settings")
 require("isaac.mappings")
 require("isaac.plugins")
+local handlers = require("isaac.handlers")
+handlers.setup()
+vim.lsp.enable({'clangd', 'luals', 'julials', 'bashls', 'arduinols'})
