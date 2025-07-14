@@ -1,32 +1,7 @@
-default_Port = "/dev/ttyACM0"
 default_Baud = 115200
 Serial_Monitor_Id = 0
 
-vim.api.nvim_create_user_command("ArduinoSetPort", function()
-    print('Available boards')
-    List_ports()
-    Port = vim.fn.input 'Enter port: '
-    print('\nport set to ' .. Port)
-end, {})
-
-function Get_port()
-    List_ports()
-    return vim.fn.input('Select Port: ')
-end
-
-function List_ports()
-    print(vim.cmd '!arduino-cli board list')
-end
-
-function List_boards()
-    print(vim.cmd '!arduino-cli board listall')
-end
-
-vim.api.nvim_create_user_command("SerialMonitor", function()
-    Port = Auto_get_port(vim.fn.expand('%:h'))
-    if not Port then
-        Port = Get_port()
-    end
+vim.api.nvim_create_user_command("ArduinoSerialMonitor", function()
 
     Baud = Auto_get_baud()
     if not Baud then
@@ -37,11 +12,12 @@ vim.api.nvim_create_user_command("SerialMonitor", function()
     local win = vim.api.nvim_get_current_win()
     local buf = vim.api.nvim_create_buf(true, true)
     vim.api.nvim_win_set_buf(win, buf)
-    Serial_Monitor_Id = vim.fn.termopen("minicom -D " .. Port .. " -b " .. Baud, {
+    Serial_Monitor_Id = vim.fn.jobstart("~/.config/nvim/scripts/serial_monitor.sh " .. Baud, {
         on_exit = function()
             Serial_Monitor_Id = 0
             print("Serial monitor closed")
-        end
+        end,
+        term = true
     })
 end, {})
 
@@ -68,7 +44,7 @@ vim.api.nvim_create_user_command("SendToSerialMonitor", function(opts)
     end
 end, {range = true, nargs = "?"})
 
-vim.api.nvim_create_user_command("SetupAutoCompile", function()
+vim.api.nvim_create_user_command("ArduinoAutoCompile", function()
 
     vim.cmd 'vnew'
     local bufnr = vim.api.nvim_get_current_buf()
@@ -93,7 +69,7 @@ vim.api.nvim_create_user_command("SetupAutoCompile", function()
 
             vim.api.nvim_chan_send(channel, "Compiling " .. vim.fn.expand('%') .. " and uploading\r\n")
             vim.fn.jobstart("arduino-cli compile -u", {
-                stdout_buffered = true,
+                stdout_buffered = false,
                 on_stdout = append_data,
                 on_stderr = append_data
             })
@@ -142,7 +118,7 @@ vim.api.nvim_create_user_command("ArduinoAutoCompile", function()
             vim.api.nvim_buf_set_lines(bufnr, 0, -1, false,
                 {"Compiling " .. vim.fn.expand('%') .. " and uploading"})
             vim.fn.jobstart("arduino-cli compile -u --no-color " .. vim.fn.expand('%'), {
-                stdout_buffered = false,
+                stdout_buffered = true,
                 on_stdout = append_data,
                 on_stderr = append_data
             })
@@ -158,19 +134,10 @@ vim.api.nvim_create_user_command("ArduinoAutoCompile", function()
     })
 end, {})
 
-function file_exists(file)
+local function file_exists(file)
     local f = io.open(file, "rb")
     if f then f:close() end
     return f ~= nil
-end
-
-function lines_from(file)
-    if not file_exists(file) then return {} end
-    local lines = {}
-    for line in io.lines(file) do
-        lines[#lines + 1] = line
-    end
-    return lines
 end
 
 function Auto_get_port(path)
@@ -182,7 +149,7 @@ function Auto_get_port(path)
     end
 
     for line in io.lines(file) do
-        _, _, port = string.find(line, "port: (%S+)")
+        local _, _, port = string.find(line, "port: (%S+)")
         if port then return port end
     end
     print("port not found in sketch.yaml")
@@ -193,7 +160,7 @@ function Auto_get_baud()
     local file = vim.fn.expand('%')
 
     for line in io.lines(file) do
-        _, _, baud = string.find(line, "Serial.begin%((%d+)%)")
+        local _, _, baud = string.find(line, "Serial.begin%((%d+)%)")
         if baud then
             return baud
         end
@@ -210,6 +177,89 @@ end, {})
 
 -- vim.api.nvim_create_user_command("AttachBoard", function() require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/attach_arduino.jl") end, {nargs = 0})
 vim.api.nvim_create_user_command("AttachBoard", function()
-    require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/arduino_attach.jl " .. vim.fn.expand('%'))
+    require("isaac.custom_functions").popup_cmd("~/.config/nvim/scripts/attach_arduino.sh " .. vim.fn.expand('%'), {})
     vim.cmd 'LspRestart'
+end, {nargs = 0})
+
+vim.api.nvim_create_user_command("WatchPorts", function()
+    require("isaac.custom_functions").popup_cmd("~/.config/nvim/scripts/watch_serial.sh", {})
+end, {nargs=0})
+
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
+local conf = require("telescope.config").values
+local actions = require "telescope.actions"
+local action_state = require "telescope.actions.state"
+local entry_display = require "telescope.pickers.entry_display"
+
+vim.api.nvim_create_user_command("ArduinoExamples", function ()
+    local opts = {}
+
+    local results = {}
+
+    local append_data = function(_,data)
+        if data then
+            for _,v in pairs(data) do
+                if v ~= "" then
+                    local result = {}
+                    result.path = v
+                    local _,_,library,example = string.find(v, "([^/]+)/examples/([^/]+)")
+                    result.library = library
+                    result.example = example
+                    results[#results+1] = result
+                end
+            end
+        end
+    end
+
+    local displayer = entry_display.create {
+        items = {
+            {width = 20},
+            {remaining = true}
+        },
+        separator = " "
+    }
+
+    local make_display = function(entry)
+        return displayer {
+            entry.library,
+            entry.example
+        }
+    end
+
+
+    vim.fn.jobstart("~/.config/nvim/scripts/arduino_examples.sh", {
+        stdout_buffered = true,
+        on_stdout = append_data,
+        on_exit = function()
+            pickers.new(opts, {
+                prompt_title = "Arduino Examples",
+                finder = finders.new_table {
+                    results = results,
+                    entry_maker = function(entry)
+                        return {
+                            value = entry,
+                            ordinal = entry.path,
+                            display = make_display,
+
+                            path = entry.path,
+                            library = entry.library,
+                            example = entry.example
+                        }
+                    end,
+                },
+                sorter = conf.generic_sorter(opts),
+                previewer = conf.file_previewer(opts),
+                attach_mappings = function (prompt_bufnr, _)
+                    actions.select_default:replace(function ()
+                        actions.close(prompt_bufnr)
+                        local selection = action_state.get_selected_entry()
+                        vim.cmd("vs|view " .. selection.path)
+                    end)
+                    return true
+                end
+            }):find()
+        end
+    })
+
 end, {nargs = 0})
