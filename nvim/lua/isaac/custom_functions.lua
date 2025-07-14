@@ -1,6 +1,6 @@
 local M = {}
 
-local function popup_window_command(cmd)
+local function popup_window_command(cmd, opts)
     local win_height = math.ceil(vim.o.lines * 0.5)
     local win_width = math.ceil(vim.o.columns * 0.5)
     local x_pos = math.ceil((vim.o.lines - win_height) * 0.5)
@@ -30,7 +30,8 @@ local function popup_window_command(cmd)
     vim.keymap.set('n', "q", function() vim.api.nvim_win_close(win, true) end, keymaps_opts)
     vim.keymap.set('n', "<ESC>", function() vim.api.nvim_win_close(win, true) end, keymaps_opts)
 
-    vim.fn.termopen(cmd)
+    opts.term = true
+    vim.fn.jobstart(cmd, opts)
 end
 
 M.popup_cmd = popup_window_command
