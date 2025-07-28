@@ -40,7 +40,6 @@ return packer.startup(function(use)
     use 'tpope/vim-fugitive'
     use 'tpope/vim-surround'
     use 'preservim/nerdcommenter'
-    use 'neovim/nvim-lspconfig'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -49,19 +48,8 @@ return packer.startup(function(use)
     use 'L3MON4D3/LuaSnip'
     use "rafamadriz/friendly-snippets"
     use 'saadparwaiz1/cmp_luasnip'
-    use 'glepnir/dashboard-nvim'
     use 'JuliaEditorSupport/julia-vim'
     use({ "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, })
-    use {
-        "catppuccin/nvim",
-        as = "catppuccin",
-        config = function()
-            require("catppuccin").setup {
-                flavour = "macchiato" -- mocha, macchiato, frappe, latte
-            }
-            vim.api.nvim_command "colorscheme catppuccin"
-        end
-    }
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'nvim-lua/plenary.nvim'
@@ -70,8 +58,7 @@ return packer.startup(function(use)
     -- or                            , branch = '0.1.x',
       requires = { {'nvim-lua/plenary.nvim'} }
     }
-    use { "nvim-telescope/telescope-file-browser.nvim" }
-    use 'segeljakt/vim-silicon'
+    use "folke/tokyonight.nvim"
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()

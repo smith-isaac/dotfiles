@@ -6,7 +6,7 @@ local function c_maps()
     vim.keymap.set('n', '<leader>mc', ':!make clean<cr>', {buffer = true})
 
     -- Pico keybindings should only work under a top-level folder named 'Pico'
-    if string.match(vim.fn.expand('%:p'), 'Pico') then
+    if string.match(vim.fn.expand('%:p'), '[Pp]ico') then
         Pico_Port = "/dev/ttyACM0"
         vim.api.nvim_create_user_command("PicoBuild", function()
             vim.cmd 'vnew'

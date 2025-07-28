@@ -1,6 +1,4 @@
 vim.keymap.set('n', '<leader>ft', ':set filetype?<CR>')
-vim.keymap.set('n', '<leader>ve', ':edit $XDG_CONFIG_HOME/nvim/init.lua<CR>')
-vim.keymap.set('n', '<leader>vr', ':source $XDG_CONFIG_HOME/nvim/init.lua<CR>')
 vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>', {silent = true})
 
 vim.keymap.set('n', '<leader><TAB>', ':tabe<CR>')

@@ -29,6 +29,9 @@ vim.api.nvim_command "let g:airline_theme='deus'"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.netrw_preview = 1
+vim.g.netrw_winsize = 30
+
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
     callback = function()
