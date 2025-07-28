@@ -1,0 +1,6 @@
+require("user.settings")
+require("user.mappings")
+require("user.plugins")
+local handlers = require("user.handlers")
+handlers.setup()
+vim.lsp.enable({'clangd', 'luals', 'julials', 'bashls', 'arduinols', 'csharpls' , 'pyright' })

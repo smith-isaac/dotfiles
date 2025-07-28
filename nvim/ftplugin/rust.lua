@@ -1,1 +1,1 @@
-require('isaac.languages').rust()
+require('user.languages').rust()

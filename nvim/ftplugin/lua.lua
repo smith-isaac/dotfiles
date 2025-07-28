@@ -1,1 +1,1 @@
-require('isaac.languages').lua()
+require('user.languages').lua()

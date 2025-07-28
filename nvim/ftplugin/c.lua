@@ -1,1 +1,1 @@
-require("isaac.languages").c()
+require("user.languages").c()

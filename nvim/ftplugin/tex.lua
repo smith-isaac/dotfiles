@@ -1,4 +1,4 @@
-require("isaac.languages").tex()
+require("user.languages").tex()
 
 vim.api.nvim_create_user_command("LaTeXAutoCompile", function()
 

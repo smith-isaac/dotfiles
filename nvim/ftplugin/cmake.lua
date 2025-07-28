@@ -1,1 +1,1 @@
-require("isaac.languages").cmake()
+require("user.languages").cmake()

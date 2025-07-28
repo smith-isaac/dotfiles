@@ -175,14 +175,14 @@ vim.api.nvim_create_user_command("GetSketchInfo", function()
 end, {})
 
 
--- vim.api.nvim_create_user_command("AttachBoard", function() require("isaac.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/attach_arduino.jl") end, {nargs = 0})
+-- vim.api.nvim_create_user_command("AttachBoard", function() require("user.custom_functions").popup_cmd("julia ~/.config/nvim/scripts/attach_arduino.jl") end, {nargs = 0})
 vim.api.nvim_create_user_command("AttachBoard", function()
-    require("isaac.custom_functions").popup_cmd("~/.config/nvim/scripts/attach_arduino.sh " .. vim.fn.expand('%'), {})
+    require("user.custom_functions").popup_cmd("~/.config/nvim/scripts/attach_arduino.sh " .. vim.fn.expand('%'), {})
     vim.cmd 'LspRestart'
 end, {nargs = 0})
 
 vim.api.nvim_create_user_command("WatchPorts", function()
-    require("isaac.custom_functions").popup_cmd("~/.config/nvim/scripts/watch_serial.sh", {})
+    require("user.custom_functions").popup_cmd("~/.config/nvim/scripts/watch_serial.sh", {})
 end, {nargs=0})
 
 local pickers = require "telescope.pickers"
