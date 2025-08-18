@@ -145,7 +145,7 @@ local function Biber(file)
 end
 
 local function tex_maps()
-    vim.keymap.set('n', '<leader>ll', ':TexlabBuild<cr>', {buffer = true})
+    vim.keymap.set('n', '<leader>ll', ':LspTexlabBuild<cr>', {buffer = true})
     vim.keymap.set('n', '<leader>lv', function() ViewPDF(vim.fn.expand("%:r")) end, {buffer = true, silent = true})
     vim.keymap.set('n', '<leader>lb', function() Biber(vim.fn.expand("%:r")) end, {buffer = true})
     vim.opt_local.foldcolumn = '3'

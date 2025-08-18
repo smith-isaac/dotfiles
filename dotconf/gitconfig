@@ -1,0 +1,9 @@
+[user]
+	email = smithisaacr@gmail.com
+	name = Isaac Smith
+[core]
+	editor = nvim
+[alias]
+        clone-for-worktrees = "!bash $HOME/.local/bin/git_clone_for_worktrees"
+        lg = "log --all --oneline --graph --decorate"
+        ab = "rev-list --left-right --count"
