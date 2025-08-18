@@ -49,6 +49,7 @@ return packer.startup(function(use)
     use "rafamadriz/friendly-snippets"
     use 'saadparwaiz1/cmp_luasnip'
     use 'JuliaEditorSupport/julia-vim'
+    use 'neovim/nvim-lspconfig'
     use({ "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, })
     if vim.fn.has("win32") ~= 1 then
         use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

@@ -6,7 +6,7 @@ vim.api.nvim_create_user_command("LaTeXAutoCompile", function()
         group = vim.api.nvim_create_augroup("LaTeX Auto Compile", {clear = true}),
         pattern = vim.fn.expand('%:t'),
         callback = function()
-            vim.cmd 'TexlabBuild'
+            vim.cmd 'LspTexlabBuild'
         end
     })
 
