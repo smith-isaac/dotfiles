@@ -15,13 +15,20 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.lcs = "trail:·,tab:>-"
 vim.opt.udf = true
-vim.opt.udir = os.getenv("HOME") .. "/.config/nvim/.undo//"
+if vim.fn.has("win32") == 1 then
+    vim.opt.udir = os.getenv("LOCALAPPDATA") .. "/.undo//"
+    vim.opt.backupdir = os.getenv("LOCALAPPDATA") .. "/.backup//"
+else
+    vim.opt.udir = os.getenv("HOME") .. "/.config/nvim/.undo//"
+    vim.opt.backupdir = os.getenv("HOME") .. "/.config/nvim/.backup//"
+end
 vim.opt.backup = true
-vim.opt.backupdir = os.getenv("HOME") .. "/.config/nvim/.backup//"
 vim.opt.modeline = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = "a"
 vim.opt.termguicolors = true
+
+vim.opt.foldmethod = "syntax"
 
 vim.opt.cot = "menu,menuone,noselect"
 vim.api.nvim_command "let g:airline_theme='deus'"
@@ -41,3 +48,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
         vim.cmd('startinsert')
     end
 })
+
+if vim.fn.has("win32") == 1 then
+    vim.o.shell = "powershell"
+    vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+    vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+    vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+    vim.o.shellquote = ""
+    vim.o.shellxquote = "" 
+end

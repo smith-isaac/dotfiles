@@ -50,8 +50,10 @@ return packer.startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'JuliaEditorSupport/julia-vim'
     use({ "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, })
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use 'nvim-treesitter/nvim-treesitter-context'
+    if vim.fn.has("win32") ~= 1 then
+        use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+        use 'nvim-treesitter/nvim-treesitter-context'
+    end
     use 'nvim-lua/plenary.nvim'
     use {
       'nvim-telescope/telescope.nvim', tag = '0.1.3',
