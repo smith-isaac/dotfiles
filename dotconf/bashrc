@@ -127,33 +127,64 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export EDITOR='vi'
-export VISUAL='vi'
-# export MANPAGER='/opt/nvim-linux64/bin/nvim --clean +Man!'
-export MANPAGER='nvim --clean +Man!'
-set -o vi
-export PATH="/home/isaacsmith/.local/bin:$PATH"
-#export PATH="/home/isaacsmith/nvim-linux64/bin:$PATH"
-export PATH="/opt/nvim-linux64/bin:$PATH"
-#export EDITOR='nvim'
-# cmatrix -s
-# jupyter-lab
-export PI=192.168.0.105
+# Some custom functions for altering PATH
+pathappend() {
+    for ARG in "$@"
+    do
+        if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+            PATH="${PATH:+"$PATH:"}$ARG"
+        fi
+    done
+    export PATH
+}
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm (append --no-use if you don't want to run nvm at start)
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+pathprepend() {
+    for ((i=$#; i>0; i--))
+    do
+        ARG=${!i}
+        if [ -d "$ARG" ] && [[ ":$PATH:" != *":$ARG:"* ]]; then
+            PATH="$ARG${PATH:+":$PATH"}"
+        fi
+    done
+    export PATH
+}
+
+# Source file if it exists
+sourcefiles() {
+    for ARG in "$@"
+    do
+        if [ -f "$ARG" ]; then
+            source "$ARG";
+        fi
+    done
+}
+
+pathprepend "$HOME/.local/bin" "/opt/roslyn/content/LanguageServer/linux-x64"
+
+if command -v nvim $> /dev/null; then
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+    export MANPAGER='nvim --clean +Man!';
+else
+    export EDITOR='vi'
+    export VISUAL='vi'
+fi
+
+set -o vi
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+sourcefiles $HOME/.cargo/env
 export PROMPT_DIRTRIM=3
 
-bind -x '"\C-f":"$HOME/.local/bin/tmux_sessionizer"'
-export PICO_SDK_PATH=/home/isaacsmith/pico/pico-sdk
-export PICO_EXAMPLES_PATH=/home/isaacsmith/pico/pico-examples
-export PICO_EXTRAS_PATH=/home/isaacsmith/pico/pico-extras
-export PICO_PLAYGROUND_PATH=/home/isaacsmith/pico/pico-playground
+if [ -f "$HOME/.local/bin/tmux_sessionizer" ]; then
+    bind -x '"\C-f":"$HOME/.local/bin/tmux_sessionizer"'
+fi
+
+[ -d "$HOME/pico/pico-sdk" ] && export PICO_SDK_PATH="$HOME/pico/pico-sdk"
+[ -d "$HOME/pico/pico-examples" ] && export PICO_EXAMPLES_PATH="$HOME/pico/pico-examples"
+[ -d "$HOME/pico/pico-extras" ] && export PICO_EXTRAS_PATH="$HOME/pico/pico-extras"
+[ -d "$HOME/pico/pico-playground" ] && export PICO_PLAYGROUND_PATH="$HOME/pico/pico-playground"
 
 
 # >>> juliaup initialize >>>
