@@ -78,4 +78,13 @@ local server_settings = {
             vim.lsp.config(server.server, server.settings)
         end
 
-        vim.lsp.enable({'clangd', 'lua_ls', 'julials', 'bashls', 'arduino_language_server', 'csharp_ls' , 'pyright', 'texlab' })
+        vim.lsp.enable({
+            'clangd',
+            'lua_ls',
+            'julials',
+            'bashls',
+            'arduino_language_server',
+            -- 'csharp_ls' ,
+            'pyright',
+            'texlab'
+        })
