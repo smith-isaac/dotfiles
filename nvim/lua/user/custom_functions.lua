@@ -19,8 +19,8 @@ local function popup_window_command(cmd, opts)
     local buf = vim.api.nvim_create_buf(false, true)
     local win = vim.api.nvim_open_win(buf, true, win_opts)
 
-    vim.api.nvim_buf_set_option(buf, "bufhidden", "wipe")
-    vim.api.nvim_win_set_option(win, "winblend", 50)
+    vim.api.nvim_set_option_value("bufhidden", "wipe", {scope = "local", buf = buf})
+    vim.api.nvim_set_option_value("winblend", 50, {scope = "local", win = win})
 
     local keymaps_opts = {
         silent = true,

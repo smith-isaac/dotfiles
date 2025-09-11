@@ -38,8 +38,13 @@ vim.keymap.set('n', '<leader>bp', ':bp<cr>')
 vim.keymap.set('n', '<leader>bq', ':bd<cr>')
 
 -- Terminal mappings
-vim.keymap.set('n', '<leader>vt', ':new term://bash<bar>resize 15<cr>')
-vim.keymap.set('n', '<leader>vv', ':vnew term://bash<cr>')
+if (vim.fn.has('win32') == 1) then
+    vim.keymap.set('n', '<leader>vt', ':new term://pwsh<bar>resize 15<cr>')
+    vim.keymap.set('n', '<leader>vv', ':vnew term://pwsh<cr>')
+elseif (vim.fn.has('unix') == 1) then
+    vim.keymap.set('n', '<leader>vt', ':new term://bash<bar>resize 15<cr>')
+    vim.keymap.set('n', '<leader>vv', ':vnew term://bash<cr>')
+end
 vim.keymap.set('n', '<leader>jj', ':new<cr>:call termopen("julia")<bar>resize 15<cr>')
 vim.keymap.set('n', '<leader>jv', ':vnew<cr>:call termopen("julia")<cr>')
 vim.keymap.set('t', '<C-n>', '<C-\\><C-n>')

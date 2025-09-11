@@ -1,4 +1,8 @@
 vim.cmd([[colorscheme tokyonight-moon]])
+require("roslyn").setup()
+
+-- Make netrw respect gitignore
+vim.g.netrw_list_hide = vim.fn['netrw_gitignore#Hide']() .. [[,.git/]]
 
 -- require('silicon').setup {
 --   font = 'CaskaydiaCove Nerd Font=20',
