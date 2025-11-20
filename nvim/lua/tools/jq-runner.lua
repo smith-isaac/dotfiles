@@ -6,9 +6,11 @@ function M.jq_query(opts)
     local query_abs_path = vim.fn.fnamemodify(query_path, ':p')
     local query_path_escaped = vim.fn.shellescape(query_abs_path)
 
+    local find_win_by_path = require("tools.utils").find_win_by_path
+
     local current_win = vim.api.nvim_get_current_win()
 
-    local query_win = require("tools.utils").find_win_by_path(query_abs_path)
+    local query_win = find_win_by_path(query_abs_path)
     if not query_win then
         vim.cmd('split ' .. query_abs_path)
         vim.cmd('silent write')

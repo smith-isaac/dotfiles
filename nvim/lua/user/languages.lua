@@ -196,7 +196,7 @@ local function julia_maps()
     end
 
     local function run_file_in_repl(file)
-        if Julia_REPL_id == nil then
+        if not Julia_REPL_id then
             start_REPL()
         end
         vim.api.nvim_chan_send(Julia_REPL_id, "include(\"" .. file .. "\")\n")

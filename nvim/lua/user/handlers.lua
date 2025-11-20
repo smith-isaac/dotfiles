@@ -4,13 +4,13 @@ local M = {}
 M.setup = function()
   local config = {
     -- disable virtual text
-    virtual_text = false,
+    virtual_text = true,
     -- show signs
     update_in_insert = true,
     underline = true,
     severity_sort = true,
     float = {
-      focusable = false,
+      focusable = true,
       style = "minimal",
       -- border = "rounded",
       source = "always",
