@@ -63,6 +63,8 @@ return packer.startup(function(use)
     }
     use "folke/tokyonight.nvim"
     use "seblyng/roslyn.nvim"
+    use "mfussenegger/nvim-dap"
+    use "mason-org/mason.nvim"
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()

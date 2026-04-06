@@ -1,3 +1,10 @@
+require("mason").setup({
+    registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+    }
+})
+
 local handlers = require("user.handlers")
 
 local server_settings = {
