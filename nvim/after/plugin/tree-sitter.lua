@@ -1,11 +1,8 @@
 if vim.fn.has("unix") == 1 then
-    require'nvim-treesitter.configs'.setup {
-        ensure_installed = {"c", "cpp", "json", "julia", "latex", "lua", "make", "markdown", "ruby", "python"},
-        auto_install = true,
-        highlight = {
-            enable = true
-        }
+    require('nvim-treesitter').setup {
+        install_dir = vim.fn.stdpath('data') .. '/site'
     }
+    require('nvim-treesitter').install {"c", "cpp", "json", "julia", "latex", "lua", "make", "markdown", "ruby", "python", "c_sharp", "bash", "razor", "gitcommit", "cmake", "dockerfile", "git_config", "git_rebase", "gitignore", "sql"}
     require'treesitter-context'.setup{
         enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
         max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
@@ -83,4 +80,10 @@ if vim.fn.has("unix") == 1 then
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = nil,
     }
+
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = {"c", "cpp", "json", "julia", "latex", "lua", "make", "markdown", "ruby", "python", "c_sharp", "bash", "razor", "gitcommit", "cmake", "dockerfile", "git_config", "git_rebase", "gitignore", "sql"},
+        callback = function() vim.treesitter.start() end
+    })
+
 end

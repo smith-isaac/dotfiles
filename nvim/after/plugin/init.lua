@@ -1,4 +1,3 @@
-vim.cmd([[colorscheme tokyonight-moon]])
 require("roslyn").setup()
 
 -- Make netrw respect gitignore

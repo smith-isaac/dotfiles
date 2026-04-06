@@ -1,6 +1,6 @@
 require("user.settings")
 require("user.mappings")
-require("user.plugins")
+require("user.lazy")
 local handlers = require("user.handlers")
 handlers.setup()
 require("user.lsp")
