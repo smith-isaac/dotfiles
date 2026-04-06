@@ -7,4 +7,6 @@ if vim.fn.has("win32") ~= 1 then
         },
         { 'nvim-treesitter/nvim-treesitter-context', lazy = false },
     }
+else
+    return {}
 end
