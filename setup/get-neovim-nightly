@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+shopt -s nullglob
+[ -f nvim.tgz ] && rm nvim.tgz
+
+echo "Getting neovim nightly"
+curl -sSL -o nvim.tgz https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
+sudo rm -rf /opt/nvim*
+sudo tar -zxf nvim.tgz -C /opt/
+if [ -h ~/.local/bin/nvim ]; then
+    rm ~/.local/bin/nvim
+fi
+mkdir -p ~/.local/bin/
+ln -s /opt/nvim-linux-x86_64/bin/nvim "$HOME/.local/bin/nvim"
+rm nvim.tgz
+
+nvim --version

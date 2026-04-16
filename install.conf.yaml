@@ -1,0 +1,29 @@
+- link:
+    "~/":
+      relink: true
+      glob: true
+      path: dotconf/*
+      prefix: "."
+    "~/.config/nvim/":
+      create: true
+      relink: true
+      glob: true
+      path: nvim/*
+    "~/.config/kitty/":
+      create: true
+      relink: true
+      glob: true
+      path: kitty/*
+    "~/.local/bin/":
+      create: true
+      relink: true
+      glob: true
+      path: scripts/*
+- shell:
+    -
+      command: curl -o ~/.git-completion.bash https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-completion.bash
+      description: Download git completion script
+    -
+      command: curl -o ~/.git-prompt.sh https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-prompt.sh
+      description: Download git prompt script
+

@@ -56,12 +56,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-source ~/.git-completion.bash
-source ~/.git-prompt.sh
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUPSTREAM="verbose"
 
 if [ "$color_prompt" = yes ]; then
     # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;33m\]$(__git_ps1 " ( %s)")\[\033[00m\] \$ '
@@ -159,9 +153,16 @@ sourcefiles() {
     done
 }
 
-pathprepend "$HOME/.local/bin" "/opt/roslyn/content/LanguageServer/linux-x64"
+pathprepend "$HOME/.local/bin" "$HOME/.juliaup/bin"
+sourcefiles "~/.git-completion.bash"  "~/.git-prompt.sh" "$HOME/.nvm/nvm.sh" "$HOME/.cargo/env"
 
-if command -v nvim $> /dev/null; then
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUPSTREAM="verbose"
+
+# If nvim is available, set to be EDITOR,VISUAL, and MANPAGER
+if command -v nvim &> /dev/null; then
     export EDITOR='nvim'
     export VISUAL='nvim'
     export MANPAGER='nvim --clean +Man!';
@@ -172,40 +173,30 @@ fi
 
 set -o vi
 
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-sourcefiles $HOME/.cargo/env
 export PROMPT_DIRTRIM=3
 
 if [ -f "$HOME/.local/bin/tmux_sessionizer" ]; then
     bind -x '"\C-f":"$HOME/.local/bin/tmux_sessionizer"'
 fi
 
-[ -d "$HOME/pico/pico-sdk" ] && export PICO_SDK_PATH="$HOME/pico/pico-sdk"
-[ -d "$HOME/pico/pico-examples" ] && export PICO_EXAMPLES_PATH="$HOME/pico/pico-examples"
-[ -d "$HOME/pico/pico-extras" ] && export PICO_EXTRAS_PATH="$HOME/pico/pico-extras"
-[ -d "$HOME/pico/pico-playground" ] && export PICO_PLAYGROUND_PATH="$HOME/pico/pico-playground"
-
-
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-case ":$PATH:" in
-    *:/home/isaacsmith/.juliaup/bin:*)
-        ;;
-
-    *)
-        export PATH=/home/isaacsmith/.juliaup/bin${PATH:+:${PATH}}
-        ;;
-esac
-
-# <<< juliaup initialize <<<
-
+# Run tmux if available
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
     exec tmux
 fi
 
+# Run starship if available
 if command -v starship &> /dev/null; then
     eval $(starship init bash)
+fi
+
+# Enable fzf keybindings if fzf is available
+if command -v fzf &> /dev/null; then
+    # First try using the eval script
+    fzf_bash="$(fzf --bash 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$(fzf_bash)"
+    else
+        sourcefiles "/usr/share/doc/fzf/examples/key-bindings.bash"
+    fi
+
 fi

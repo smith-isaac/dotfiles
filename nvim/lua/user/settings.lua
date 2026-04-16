@@ -37,7 +37,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.netrw_preview = 1
-vim.g.netrw_winsize = 30
+
+-- Remove linematch so the nvim-diff works more intuitively
+-- https://github.com/neovim/neovim/issues/22696
+vim.opt.diffopt:remove("linematch:40")
 
 vim.api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
@@ -55,5 +58,5 @@ if vim.fn.has("win32") == 1 then
     vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
     vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
     vim.o.shellquote = ""
-    vim.o.shellxquote = "" 
+    vim.o.shellxquote = ""
 end

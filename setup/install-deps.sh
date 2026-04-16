@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# Dependencies for FZF
-apt install fzf ripgrep universal-ctags silversearcher-ag fd-find
-
-# Dependencies for Lsp-config
-apt install clangd bear
-gem install solargraph
+# Common packages I like to use
+sudo apt install fzf ripgrep fd-find curl wget
 
 # Node
-./nvm_install.sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+source $HOME/.nvm/nvm.sh
 nvm install --lts
+
+# Julia
+curl -fsSL https://install.julialang.org | sh
