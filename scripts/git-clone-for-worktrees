@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+set -e
+
+usage() {
+    cat << EOF
+Usage: git-clone-for-worktrees [-h] <repository> [<directory>]
+
+Options:
+    -h: Show usage
+
+Arguments:
+    repository: Repository to clone
+    directory: Directory to create clone in [defaults to repository name]
+EOF
+}
+
+while getopts 'h' opt; do
+    case "$opt" in
+        h) usage; exit 0;;
+        *) usage >&2; exit 1;;
+    esac
+done
+
+# Examples
+# git-clone-for-worktrees git@url.com:/name/repo.git
+# => Clones to a /repo directory
+#
+# git-clone-for-worktrees git@url.com:/name/repo.git my-repo
+# => Clones to a /my-repo directory
+
+url="$1"
+basename="${url##*/}"
+name="${2:-${basename%.*}}"
+
+mkdir "$name"
+cd "$name"
+
+# Moves all the administrative git file (a.k.a $GIT_DIR) under .bare directory.
+#
+# Plan is to create worktrees as siblings of this directory.
+# Example targeted structure:
+# .bare
+# main
+# new-feature
+
+git clone --bare "$url" .bare
+echo "gitdir: ./.bare" > .git
+
+# Explicitly sets the remote origin fetch so we can fetch remote branches
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
+# Gets all branches from origin
+git fetch origin
