@@ -1,17 +1,64 @@
 #!/usr/bin/env bash
 
-find_dirs=(~/repos ~/stuff ~/)
-find_dirs_checked=()
-for dir in "${find_dirs[@]}"; do
-    if [ -d "$dir" ]; then
-        find_dirs_checked+=("$dir")
-    fi
-done
+usage() {
+    cat << EOF
+Usage: tmux_sessionizer [-h] [path]
 
-if [ $# -eq 1 ]; then
-    selected=$1
+Starts a new \`tmux\` session at selected path
+
+Options:
+    -h: Show usage
+
+Arguments:
+    path: Path to start new \`tmux\` session (optional)
+
+If path is not given, path is selected through \`fzf\` from the $HOME directory, or directories specified in $HOME/.tmux_sessionizer_directories
+
+Requires \`tmux\` and \`fzf\`
+EOF
+}
+
+if ! command -v fzf &> /dev/null; then
+    echo "\`fzf\` not available" >&2
+    exit 1
+elif ! command -v tmux &> /dev/null; then
+    echo "\`tmux\` not available" >&2
+    exit 1
+fi
+
+while getopts 'h' opt; do
+    case "$opt" in
+        h) usage; exit 0;;
+        *) usage >&2; exit 1;;
+    esac
+done
+shift $((OPTIND - 1))
+
+find_dirs=("$HOME")
+
+if [[ -f "$HOME/.tmux_sessionizer_directories" ]]; then
+    readarray -t custom_dirs < "$HOME/.tmux_sessionizer_directories"
+    for dir in "${custom_dirs[@]}"; do
+        dir="${dir/#\~/$HOME}"
+        if [[ -d "$dir" ]]; then
+            find_dirs+=("$dir")
+        else
+            echo "$dir is not directory"
+        fi
+    done
+fi
+
+if [[ $# -eq 1 ]]; then
+    selected="$1"
+    if [[ ! -d "$selected" ]]; then
+        echo "Path \"$selected\" does not exist"
+        exit 1
+    fi
+elif [[ $# -eq 0 ]]; then
+    selected=$(find -L "${find_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
 else
-    selected=$(find "${find_dirs_checked[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
+    usage >&2
+    exit 1
 fi
 
 if [ -z "$selected" ]; then
@@ -21,12 +68,12 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if [ -z $TMUX ] && [ -z $tmux_running ]; then
+if [ -z "$TMUX" ] && [ -z "$tmux_running" ]; then
     tmux new-session -s "$selected_name" -c "$selected"
     exit 0
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
     tmux new-session -ds "$selected_name" -c "$selected"
 fi
 

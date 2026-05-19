@@ -145,13 +145,13 @@ pathprepend() {
 sourcefiles() {
     for ARG in "$@"; do
         if [ -f "$ARG" ]; then
-            source "$ARG";
+            source "$ARG"
         fi
     done
 }
 
 pathprepend "$HOME/.local/bin" "$HOME/.juliaup/bin"
-sourcefiles "~/.git-completion.bash"  "~/.git-prompt.sh" "$HOME/.nvm/nvm.sh" "$HOME/.cargo/env"
+sourcefiles "$HOME/.git-completion.bash"  "$HOME/.git-prompt.sh" "$HOME/.nvm/nvm.sh" "$HOME/.cargo/env"
 
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
@@ -183,7 +183,7 @@ fi
 
 # Run starship if available
 if command -v starship &> /dev/null; then
-    eval $(starship init bash)
+    eval "$(starship init bash)"
 fi
 
 # Enable fzf keybindings if fzf is available
@@ -191,7 +191,7 @@ if command -v fzf &> /dev/null; then
     # First try using the eval script
     fzf_bash="$(fzf --bash 2> /dev/null)"
     if [ $? -eq 0 ]; then
-        eval "$(fzf_bash)"
+        eval "$fzf_bash"
     else
         sourcefiles "/usr/share/doc/fzf/examples/key-bindings.bash"
     fi
