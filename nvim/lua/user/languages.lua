@@ -169,40 +169,40 @@ local function rust_maps()
     end
 end
 
-local function julia_maps()
-    -- if Julia_REPL_id == nil then
-    --     Julia_REPL_id = 0
-    -- end
+local function julia_maps(buf_nr)
 
     local function start_REPL()
         vim.cmd 'vnew'
         local win = vim.api.nvim_get_current_win()
         local buf = vim.api.nvim_create_buf(true, true)
         vim.api.nvim_win_set_buf(win, buf)
-        Julia_REPL_id = vim.fn.termopen("julia", {
+        Julia_REPL_id = vim.fn.jobstart("julia", {
             on_exit = function()
                 Julia_REPL_id = nil
                 print("Julia REPL closed")
-            end
+            end,
+            term = true
         })
     end
 
     vim.api.nvim_create_user_command("REPL", function() start_REPL() end, {})
 
-    local function write_to_repl(cmd)
-        if Julia_REPL_id ~= nil then
-            vim.api.nvim_chan_send(Julia_REPL_id, cmd .. "\n")
-        end
-    end
+    local function RunLinesInREPL(opts)
+        local tmpfile = vim.fn.stdpath 'data' .. '/julia.tmp'
+        local tmpfile_abs_path = vim.fn.fnamemodify(tmpfile, ':p')
 
-    local function run_file_in_repl(file)
         if not Julia_REPL_id then
             start_REPL()
         end
-        vim.api.nvim_chan_send(Julia_REPL_id, "include(\"" .. file .. "\")\n")
+
+        local cmd = "include(\"" .. tmpfile_abs_path .. "\")\n"
+        vim.cmd(string.format("silent %d,%dwrite! %s", opts.line1, opts.line2, tmpfile_abs_path))
+        vim.api.nvim_chan_send(Julia_REPL_id, cmd)
     end
 
-    vim.keymap.set('n', '<leader>r', function() run_file_in_repl(vim.fn.expand('%')) end, {buffer = true})
+    vim.api.nvim_buf_create_user_command(buf_nr, 'RunLinesInREPL', RunLinesInREPL, {range = '%'})
+    vim.api.nvim_buf_set_keymap(buf_nr, 'v', '<leader>r', ':RunLinesInREPL<CR>', {silent = true, desc = 'Run selected lines in julia REPL'})
+    vim.api.nvim_buf_set_keymap(buf_nr, 'n', '<leader>r', ':RunLinesInREPL<CR>', {silent = true, desc = 'Run selected lines in julia REPL'})
 
 end
 

@@ -1,1 +1,1 @@
-require("user.languages").julia()
+require("user.languages").julia(0)
