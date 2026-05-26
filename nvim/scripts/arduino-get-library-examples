@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+cmds=(arduino-cli jq)
+for cmd in "${cmds[@]}"; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "\`$cmd\` not found" >&2
+        exit 1
+    fi
+done
+
+usage() {
+    cat << EOF
+Usage: arduino-get-library-examples library
+
+Gets example paths for particular library
+EOF
+}
+
+if [[ $# -lt 1 ]]; then
+    usage >&2
+    exit 1
+fi
+
+lib="$1"
+
+arduino-cli lib examples "$lib" --json | jq -r '.examples | map(.examples) | flatten | .[]' | sort | uniq

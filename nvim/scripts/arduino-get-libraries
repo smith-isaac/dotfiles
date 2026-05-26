@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cmds=(arduino-cli jq)
+for cmd in "${cmds[@]}"; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "\`$cmd\` not found" >&2
+        exit 1
+    fi
+done
+
+arduino-cli lib list --all --json | jq -r '.installed_libraries[].library.name' | sort | uniq

@@ -70,11 +70,11 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 
   vim.api.nvim_buf_create_user_command(bufnr, "ShowErrorList", function ()
-    vim.diagnostic.setloclist({severity = vim.diagnostic.severity.E})
+    vim.diagnostic.setloclist({severity = vim.diagnostic.severity.ERROR})
   end, {})
 
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[e", '<cmd>lua vim.diagnostic.jump({count = -1, severity = vim.diagnostic.severity.E})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", '<cmd>lua vim.diagnostic.jump({count = 1, severity = vim.diagnostic.severity.E})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "[e", '<cmd>lua vim.diagnostic.jump({count = -1, severity = vim.diagnostic.severity.ERROR})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", '<cmd>lua vim.diagnostic.jump({count = 1, severity = vim.diagnostic.severity.ERROR})<CR>', opts)
 
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end

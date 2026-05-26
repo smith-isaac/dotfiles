@@ -1,11 +1,11 @@
-default_Baud = 115200
+Default_Baud = 115200
 Serial_Monitor_Id = 0
 
 vim.api.nvim_create_user_command("ArduinoSerialMonitor", function()
 
     Baud = Auto_get_baud()
     if not Baud then
-        Baud = default_Baud
+        Baud = Default_Baud
     end
 
     vim.cmd 'vnew'
@@ -185,81 +185,37 @@ vim.api.nvim_create_user_command("WatchPorts", function()
     require("user.custom_functions").popup_cmd("~/.config/nvim/scripts/watch_serial.sh", {})
 end, {nargs=0})
 
-local pickers = require "telescope.pickers"
-local finders = require "telescope.finders"
-local conf = require("telescope.config").values
-local actions = require "telescope.actions"
-local action_state = require "telescope.actions.state"
-local entry_display = require "telescope.pickers.entry_display"
+local function select_library_example(library)
+    vim.system({ vim.fn.stdpath("config") .. "/scripts/arduino-get-library-examples", library }, { text = true }, function(obj)
+        local examples = vim.split(obj.stdout, "\n", {trimempty = true})
+        vim.schedule(function()
+            vim.ui.select(examples, {
+                prompt = "Select example:"
+            }, function(choice)
+                vim.print(('Selected "%s"'):format(choice))
+                if not choice then
+                    return
+                end
+                vim.schedule(function()
+                    vim.cmd('vsplit ' .. choice)
+                end)
+            end)
+        end)
+    end)
+end
 
 vim.api.nvim_create_user_command("ArduinoExamples", function ()
-    local opts = {}
 
-    local results = {}
-
-    local append_data = function(_,data)
-        if data then
-            for _,v in pairs(data) do
-                if v ~= "" then
-                    local result = {}
-                    result.path = v
-                    local _,_,library,example = string.find(v, "([^/]+)/examples/([^/]+)")
-                    result.library = library
-                    result.example = example
-                    results[#results+1] = result
-                end
-            end
-        end
-    end
-
-    local displayer = entry_display.create {
-        items = {
-            {width = 20},
-            {remaining = true}
-        },
-        separator = " "
-    }
-
-    local make_display = function(entry)
-        return displayer {
-            entry.library,
-            entry.example
-        }
-    end
-
-
-    vim.fn.jobstart("~/.config/nvim/scripts/arduino_examples.sh", {
-        stdout_buffered = true,
-        on_stdout = append_data,
-        on_exit = function()
-            pickers.new(opts, {
-                prompt_title = "Arduino Examples",
-                finder = finders.new_table {
-                    results = results,
-                    entry_maker = function(entry)
-                        return {
-                            value = entry,
-                            ordinal = entry.path,
-                            display = make_display,
-
-                            path = entry.path,
-                            library = entry.library,
-                            example = entry.example
-                        }
-                    end,
-                },
-                sorter = conf.generic_sorter(opts),
-                previewer = conf.file_previewer(opts),
-                attach_mappings = function (prompt_bufnr, _)
-                    actions.select_default:replace(function ()
-                        actions.close(prompt_bufnr)
-                        local selection = action_state.get_selected_entry()
-                        vim.cmd("vs|view " .. selection.path)
-                    end)
-                    return true
-                end
-            }):find()
-        end
-    })
+    vim.system({ vim.fn.stdpath("config") .. "/scripts/arduino-get-libraries" }, { text = true }, function(obj)
+        vim.schedule(function()
+            local libraries = vim.split(obj.stdout, "\n", {trimempty = true})
+            vim.ui.select(libraries, {
+                prompt = 'Select Arduino Library:'
+            }, function(choice)
+                vim.print(('Selected "%s"'):format(choice))
+                select_library_example(choice)
+            end)
+        end)
+    end)
 
 end, {nargs = 0})
