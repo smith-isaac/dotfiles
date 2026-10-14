@@ -188,15 +188,13 @@ local function julia_maps(buf_nr)
     vim.api.nvim_create_user_command("REPL", function() start_REPL() end, {})
 
     local function RunLinesInREPL(opts)
-        local tmpfile = vim.fn.stdpath 'data' .. '/julia.tmp'
-        local tmpfile_abs_path = vim.fn.fnamemodify(tmpfile, ':p')
-
         if not Julia_REPL_id then
-            start_REPL()
+            print("REPL not found, start REPL first")
+            return
         end
 
-        local cmd = "include(\"" .. tmpfile_abs_path .. "\")\n"
-        vim.cmd(string.format("silent %d,%dwrite! %s", opts.line1, opts.line2, tmpfile_abs_path))
+        local lines = table.concat(vim.api.nvim_buf_get_lines(0, opts.line1 - 1, opts.line2, false), "\n\t")
+        local cmd = "begin\n\t" .. lines .. "\nend\n"
         vim.api.nvim_chan_send(Julia_REPL_id, cmd)
     end
 
